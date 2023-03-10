@@ -5,5 +5,16 @@
              version="3.0">
     <persistence-unit name="default">
 
+        <class>cz.cvut.fel.trippidy.model.Category</class>
+        <class>cz.cvut.fel.trippidy.model.Item</class>
+        <class>cz.cvut.fel.trippidy.model.Member</class>
+        <class>cz.cvut.fel.trippidy.model.Trip</class>
+        <class>cz.cvut.fel.trippidy.model.UserProfile</class>
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:8760/postgres"/>
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+            <property name="hibernate.connection.username" value="admin"/>
+            <property name="hibernate.connection.password" value="admin"/>
+        </properties>
     </persistence-unit>
 </persistence>
