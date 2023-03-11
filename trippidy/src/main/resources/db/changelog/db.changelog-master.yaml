@@ -1,0 +1,206 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1678568602951-1
+      author: koten (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_category
+                  name: id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+            tableName: Category
+  - changeSet:
+      id: 1678568602951-2
+      author: koten (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_item
+                  name: id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(128)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: isChecked
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: amount
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: isPrivate
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: isShared
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: price
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: member_id_fk
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: category_id_fk
+                  type: INT
+            tableName: Item
+  - changeSet:
+      id: 1678568602951-3
+      author: koten (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_member
+                  name: id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: role
+                  type: VARCHAR(64)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: accepted
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: trip_id_fk
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: user_id_fk
+                  type: INT
+            tableName: Member
+  - changeSet:
+      id: 1678568602951-4
+      author: koten (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_trip
+                  name: id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(128)
+            tableName: Trip
+  - changeSet:
+      id: 1678568602951-5
+      author: koten (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_userprofile
+                  name: id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: firstname
+                  type: VARCHAR(128)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: lastname
+                  type: VARCHAR(128)
+            tableName: UserProfile
+  - changeSet:
+      id: 1678568602951-6
+      author: koten (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: category_id_fk
+            baseTableName: Item
+            constraintName: FK_ITEM_ON_CATEGORY_ID_FK
+            referencedColumnNames: id
+            referencedTableName: Category
+  - changeSet:
+      id: 1678568602951-7
+      author: koten (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: member_id_fk
+            baseTableName: Item
+            constraintName: FK_ITEM_ON_MEMBER_ID_FK
+            referencedColumnNames: id
+            referencedTableName: Member
+  - changeSet:
+      id: 1678568602951-8
+      author: koten (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: trip_id_fk
+            baseTableName: Member
+            constraintName: FK_MEMBER_ON_TRIP_ID_FK
+            referencedColumnNames: id
+            referencedTableName: Trip
+  - changeSet:
+      id: 1678568602951-9
+      author: koten (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id_fk
+            baseTableName: Member
+            constraintName: FK_MEMBER_ON_USER_ID_FK
+            referencedColumnNames: id
+            referencedTableName: UserProfile
+
