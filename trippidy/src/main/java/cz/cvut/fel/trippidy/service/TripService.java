@@ -1,19 +1,23 @@
 package cz.cvut.fel.trippidy.service;
 
+import com.speedment.jpastreamer.application.JPAStreamer;
 import cz.cvut.fel.trippidy.model.Trip;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import cz.cvut.fel.trippidy.model.Trip$;
 
-@Stateless
+import javax.enterprise.context.ApplicationScoped;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@ApplicationScoped
 public class TripService {
 
-    // connection to the database
-    @PersistenceContext
-    EntityManager em;
+    public List<Trip> findTrips() {
+        JPAStreamer jpaStreamer = JPAStreamer.of("test");
 
-    public Trip findTrip(Integer id) {
-        //em.getEntityManagerFactory().getCache().evictAll();
-        return em.find(Trip.class, id);
+        List<Trip> a = jpaStreamer.stream(Trip.class)
+                .filter(Trip$.name.startsWith("A"))
+                .collect(Collectors.toList());
+
+        return a;
     }
 }

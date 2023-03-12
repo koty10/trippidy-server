@@ -55,6 +55,10 @@ public class Item {
         return isChecked;
     }
 
+    public boolean getIsChecked() {
+        return isChecked;
+    }
+
     public void setChecked(boolean checked) {
         isChecked = checked;
     }
@@ -71,11 +75,19 @@ public class Item {
         return isPrivate;
     }
 
+    public boolean getIsPrivate() {
+        return isPrivate;
+    }
+
     public void setPrivate(boolean aPrivate) {
         isPrivate = aPrivate;
     }
 
     public boolean isShared() {
+        return isShared;
+    }
+
+    public boolean getIsShared() {
         return isShared;
     }
 

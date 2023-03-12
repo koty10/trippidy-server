@@ -10,7 +10,7 @@ services:
       - "4848:4848" # admin
       - "9009:9009" # debug
     volumes:
-      - ./target/trippidy-v1.war:/opt/payara/deployments/trippidy-v1.war
+      - ./target/trippidy-v1.war:/opt/payara/appserver/glassfish/domains/domain1/autodeploy/trippidy-v1.war
     depends_on:
       - db
 
