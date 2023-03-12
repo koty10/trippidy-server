@@ -3,10 +3,12 @@
   <component name="JpaBuddyIdeaProjectConfig">
     <option name="defaultUnitInitialized" value="true" />
     <option name="renamerInitialized" value="true" />
-    <option name="isSnapshotDb" value="false" />
+    <option name="sourceModelValue" value="Default" />
+    <option name="targetDbValue" value="d75e81bb-1d68-4d79-a1bf-7c9bfb1d3723" />
     <option name="snapshotDbValue" value="d75e81bb-1d68-4d79-a1bf-7c9bfb1d3723" />
     <option name="snapshotModelValue" value="Default" />
     <option name="updateChangeLogPath" value="src/main/resources/db/changelog/db.changelog-master.yaml" />
     <option name="updateDbConnectionName" value="d75e81bb-1d68-4d79-a1bf-7c9bfb1d3723" />
+    <option name="newEntityIdStrategy" value="Auto" />
   </component>
 </project>

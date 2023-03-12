@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.13.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <include file="changelog/2023/03/12-01-changelog-added-dates-to-trip.xml"/>
+    <changeSet id="1678580913275-1" author="koten (generated)">
+        <createTable tableName="category">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_category"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1678580913275-2" author="koten (generated)">
+        <createTable tableName="item">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_item"/>
+            </column>
+            <column name="name" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ischecked" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isprivate" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isshared" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="member_id_fk" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id_fk" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1678580913275-3" author="koten (generated)">
+        <createTable tableName="member">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_member"/>
+            </column>
+            <column name="role" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="accepted" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="trip_id_fk" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id_fk" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1678580913275-4" author="koten (generated)">
+        <createTable tableName="trip">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_trip"/>
+            </column>
+            <column name="name" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1678580913275-5" author="koten (generated)">
+        <createTable tableName="userprofile">
+            <column autoIncrement="true" name="id" type="INTEGER">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_userprofile"/>
+            </column>
+            <column name="firstname" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lastname" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1678580913275-6" author="koten (generated)">
+        <addForeignKeyConstraint baseColumnNames="category_id_fk" baseTableName="item"
+                                 constraintName="fk_item_on_category_id_fk" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="category"/>
+    </changeSet>
+    <changeSet id="1678580913275-7" author="koten (generated)">
+        <addForeignKeyConstraint baseColumnNames="member_id_fk" baseTableName="item"
+                                 constraintName="fk_item_on_member_id_fk" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="member"/>
+    </changeSet>
+    <changeSet id="1678580913275-8" author="koten (generated)">
+        <addForeignKeyConstraint baseColumnNames="trip_id_fk" baseTableName="member"
+                                 constraintName="fk_member_on_trip_id_fk" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="trip"/>
+    </changeSet>
+    <changeSet id="1678580913275-9" author="koten (generated)">
+        <addForeignKeyConstraint baseColumnNames="user_id_fk" baseTableName="member"
+                                 constraintName="fk_member_on_user_id_fk" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="userprofile"/>
+    </changeSet>
+
+</databaseChangeLog>

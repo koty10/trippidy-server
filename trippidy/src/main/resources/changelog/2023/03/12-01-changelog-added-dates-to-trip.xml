@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.13.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1678581411098-1" author="koten (generated)">
+        <addColumn tableName="Trip">
+            <column name="date_from" type="DATETIME"/>
+            <column name="date_to" type="DATETIME"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="1678581411098-2" author="koten (generated)">
+        <addNotNullConstraint columnName="date_from" tableName="Trip"/>
+    </changeSet>
+    <changeSet id="1678581411098-4" author="koten (generated)">
+        <addNotNullConstraint columnName="date_to" tableName="Trip"/>
+    </changeSet>
+
+</databaseChangeLog>
