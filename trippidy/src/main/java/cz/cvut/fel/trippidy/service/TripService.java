@@ -11,13 +11,15 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class TripService {
 
-    public List<Trip> findTrips() {
-        JPAStreamer jpaStreamer = JPAStreamer.of("test");
+    JPAStreamer jpaStreamer;
 
-        List<Trip> a = jpaStreamer.stream(Trip.class)
+    public TripService() {
+        jpaStreamer = JPAStreamer.of("test");
+    }
+
+    public List<Trip> findTrips() {
+        return jpaStreamer.stream(Trip.class)
                 .filter(Trip$.name.startsWith("A"))
                 .collect(Collectors.toList());
-
-        return a;
     }
 }
