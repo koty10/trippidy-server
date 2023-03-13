@@ -7,10 +7,9 @@ import java.util.Objects;
 
 @Entity
 public class UserProfile {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    private String id;
     @Basic
     @Column(name = "firstname", nullable = false, length = 128)
     private String firstname;
@@ -20,11 +19,11 @@ public class UserProfile {
     @OneToMany(mappedBy = "userProfile")
     private Collection<Member> members;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

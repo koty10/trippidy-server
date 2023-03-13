@@ -26,6 +26,6 @@ public class MyTripResource {
     @GET
     @Produces("application/json")
     public List<Trip> trips() {
-        return tripService.findTrips();
+        return tripService.findTrips(securityContext.getUserPrincipal().getName());
     }
 }
