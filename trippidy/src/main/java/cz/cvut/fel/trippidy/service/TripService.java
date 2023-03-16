@@ -20,10 +20,9 @@ public class TripService {
     EntityManager entityManager;
 
     public List<Trip> findTrips(String userId) {
-        return entityManager.createNamedQuery(Trip.FIND_BY_USER_PROFILE_ID, Member.class)
+        return entityManager.createNamedQuery(Trip.FIND_BY_USER_PROFILE_ID, Trip.class)
                 .setParameter("userId", userId)
-                .getResultStream().map(Member::getTrip)
-                .collect(Collectors.toList());
+                .getResultList();
 
 //        return jpaStreamer.stream(UserProfile.class)
 //                .filter(UserProfile$.id.equal(userId))
@@ -36,22 +35,25 @@ public class TripService {
     }
 
     public Trip createTrip(String userId, String name, LocalDateTime dateFrom, LocalDateTime dateTo) {
-        return null;
-        //UserProfile userProfile = jpaStreamer.stream(UserProfile.class).filter(u -> u.getId().equals(userId)).findFirst().orElseThrow();
+        //return null;
+        UserProfile userProfile = entityManager.createNamedQuery(UserProfile.FIND_BY_ID, UserProfile.class)
+                .setParameter("userId", userId)
+                .getSingleResult();
 
-//        Member member = new Member();
-//        member.setAccepted(true);
-//        member.setRole("admin");
-//        member.setUserProfile(userProfile);
-//
-//        Trip trip = new Trip();
-//        trip.setName(name);
-//        trip.setDateFrom(dateFrom);
-//        trip.setDateTo(dateTo);
-//        trip.addMember(member);
-//
-//        entityManager.persist(trip);
-//        //entityManager.persist(member);
-//        return trip;
+        Member member = new Member();
+        member.setAccepted(true);
+        member.setRole("admin");
+        member.setUserProfile(userProfile);
+
+        Trip trip = new Trip();
+        trip.setName(name);
+        trip.setDateFrom(dateFrom);
+        trip.setDateTo(dateTo);
+        trip.addMember(member);
+        member.setTrip(trip);
+
+        entityManager.persist(trip);
+        //entityManager.persist(member);
+        return trip;
     }
 }

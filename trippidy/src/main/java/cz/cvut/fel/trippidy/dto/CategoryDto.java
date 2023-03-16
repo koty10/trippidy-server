@@ -35,6 +35,18 @@ public class CategoryDto implements Serializable {
         return items;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setItems(Collection<ItemDto> items) {
+        this.items = items;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -9,9 +9,7 @@ import java.util.Objects;
 
 @Entity
 @NamedQueries({
-        //@NamedQuery(name = "Trip.findByUserProfileId", query = "select t from Trip t join Member m on t.id = m.trip.id join UserProfile u where u.id = :userId"),
-        @NamedQuery(name = Trip.FIND_BY_USER_PROFILE_ID, query = "select m from Member m join UserProfile u on m.userProfile.id = u.id where u.id = :userId"),
-        //@NamedQuery(name = Trip.FIND_BY_USER_PROFILE_ID, query = "select m from Member m join UserProfile m.userProfile u where u.id = :userId"),
+        @NamedQuery(name = Trip.FIND_BY_USER_PROFILE_ID, query = "select t from Trip t join t.members m join m.userProfile u where u.id = :userId"),
 }
 )
 public class Trip {
@@ -23,7 +21,7 @@ public class Trip {
     @Basic
     @Column(name = "name", nullable = false, length = 128)
     private String name;
-    @OneToMany(mappedBy = "trip")
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
     private Collection<Member> members;
 
     @Column(name = "date_from", nullable = false)

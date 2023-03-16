@@ -6,7 +6,11 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = UserProfile.FIND_BY_ID, query = "select u from UserProfile u where u.id = :userId"),
+})
 public class UserProfile {
+    public static final String FIND_BY_ID = "UserProfile.findById";
     @Id
     @Column(name = "id", nullable = false)
     private String id;
@@ -16,7 +20,7 @@ public class UserProfile {
     @Basic
     @Column(name = "lastname", nullable = false, length = 128)
     private String lastname;
-    @OneToMany(mappedBy = "userProfile")
+    @OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL)
     private Collection<Member> members;
 
     public String getId() {

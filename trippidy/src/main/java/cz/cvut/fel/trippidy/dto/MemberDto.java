@@ -65,6 +65,38 @@ public class MemberDto implements Serializable {
         return userProfileLastname;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
+    }
+
+    public void setItems(Collection<ItemDto> items) {
+        this.items = items;
+    }
+
+    public void setTripId(int tripId) {
+        this.tripId = tripId;
+    }
+
+    public void setUserProfileId(String userProfileId) {
+        this.userProfileId = userProfileId;
+    }
+
+    public void setUserProfileFirstname(String userProfileFirstname) {
+        this.userProfileFirstname = userProfileFirstname;
+    }
+
+    public void setUserProfileLastname(String userProfileLastname) {
+        this.userProfileLastname = userProfileLastname;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

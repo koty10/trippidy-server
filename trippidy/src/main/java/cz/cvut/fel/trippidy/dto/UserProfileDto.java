@@ -41,6 +41,22 @@ public class UserProfileDto implements Serializable {
         return members;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public void setMembers(Collection<MemberDto> members) {
+        this.members = members;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

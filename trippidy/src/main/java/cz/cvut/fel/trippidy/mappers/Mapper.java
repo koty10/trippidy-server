@@ -49,8 +49,18 @@ public interface Mapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Item partialUpdate(ItemDto itemDto, @MappingTarget Item item);
 
+    @Mappings({
+            @Mapping(source = "userProfile.id", target = "userProfileId"),
+            @Mapping(source = "userProfile.firstname", target = "userProfileFirstname"),
+            @Mapping(source = "trip.id", target = "tripId")
+    })
     MemberDto toDto(Member member);
-
+    @Mappings({
+            @Mapping(source = "userProfileId", target = "userProfile.id"),
+            @Mapping(source = "userProfileFirstname", target = "userProfile.firstname"),
+            @Mapping(source = "userProfileLastname", target = "userProfile.lastname"),
+            @Mapping(source = "tripId", target = "trip.id")
+    })
     Member toEntity(MemberDto memberDto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

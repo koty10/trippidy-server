@@ -2,6 +2,9 @@ package cz.cvut.fel.trippidy.dto;
 
 import cz.cvut.fel.trippidy.entity.Trip;
 
+import javax.json.bind.annotation.JsonbDateFormat;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapters;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -14,7 +17,9 @@ public class TripDto implements Serializable {
     private int id;
     private String name;
     private Collection<MemberDto> members;
+    //@JsonbDateFormat(value = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateFrom;
+    //@JsonbDateFormat(value = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateTo;
 
     public TripDto(int id, String name, Collection<MemberDto> members, LocalDateTime dateFrom, LocalDateTime dateTo) {
@@ -46,6 +51,26 @@ public class TripDto implements Serializable {
 
     public LocalDateTime getDateTo() {
         return dateTo;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMembers(Collection<MemberDto> members) {
+        this.members = members;
+    }
+
+    public void setDateFrom(LocalDateTime dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public void setDateTo(LocalDateTime dateTo) {
+        this.dateTo = dateTo;
     }
 
     @Override

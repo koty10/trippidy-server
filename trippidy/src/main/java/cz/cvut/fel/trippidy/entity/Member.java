@@ -17,7 +17,7 @@ public class Member {
     @Basic
     @Column(name = "accepted", nullable = false)
     private boolean accepted;
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private Collection<Item> items;
     @ManyToOne
     @JoinColumn(name = "trip_id_fk", referencedColumnName = "id", nullable = false)
