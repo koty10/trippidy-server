@@ -1,23 +1,26 @@
 package cz.cvut.fel.trippidy.dto;
 
+import cz.cvut.fel.trippidy.entity.Item;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link cz.cvut.fel.trippidy.model.Item} entity
+ * A DTO for the {@link Item} entity
  */
 public class ItemDto implements Serializable {
-    private final int id;
-    private final String name;
-    private final boolean isChecked;
-    private final int amount;
-    private final boolean isPrivate;
-    private final boolean isShared;
-    private final int price;
-    private final int memberMemberId;
-    private final String categoryCategoryName;
+    private int id;
+    private String name;
+    private boolean isChecked;
+    private int amount;
+    private boolean isPrivate;
+    private boolean isShared;
+    private int price;
+    private int memberId;
+    private int categoryId;
+    private String categoryName;
 
-    public ItemDto(int id, String name, boolean isChecked, int amount, boolean isPrivate, boolean isShared, int price, int memberMemberId, String categoryCategoryName) {
+    public ItemDto(int id, String name, boolean isChecked, int amount, boolean isPrivate, boolean isShared, int price, int memberId, int categoryId, String categoryName) {
         this.id = id;
         this.name = name;
         this.isChecked = isChecked;
@@ -25,8 +28,12 @@ public class ItemDto implements Serializable {
         this.isPrivate = isPrivate;
         this.isShared = isShared;
         this.price = price;
-        this.memberMemberId = memberMemberId;
-        this.categoryCategoryName = categoryCategoryName;
+        this.memberId = memberId;
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+    }
+
+    public ItemDto() {
     }
 
     public int getId() {
@@ -57,12 +64,16 @@ public class ItemDto implements Serializable {
         return price;
     }
 
-    public int getMemberMemberId() {
-        return memberMemberId;
+    public int getMemberId() {
+        return memberId;
     }
 
-    public String getCategoryCategoryName() {
-        return categoryCategoryName;
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
     }
 
     @Override
@@ -77,13 +88,14 @@ public class ItemDto implements Serializable {
                 Objects.equals(this.isPrivate, entity.isPrivate) &&
                 Objects.equals(this.isShared, entity.isShared) &&
                 Objects.equals(this.price, entity.price) &&
-                Objects.equals(this.memberMemberId, entity.memberMemberId) &&
-                Objects.equals(this.categoryCategoryName, entity.categoryCategoryName);
+                Objects.equals(this.memberId, entity.memberId) &&
+                Objects.equals(this.categoryId, entity.categoryId) &&
+                Objects.equals(this.categoryName, entity.categoryName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, isChecked, amount, isPrivate, isShared, price, memberMemberId, categoryCategoryName);
+        return Objects.hash(id, name, isChecked, amount, isPrivate, isShared, price, memberId, categoryId, categoryName);
     }
 
     @Override
@@ -96,7 +108,8 @@ public class ItemDto implements Serializable {
                 "isPrivate = " + isPrivate + ", " +
                 "isShared = " + isShared + ", " +
                 "price = " + price + ", " +
-                "memberMemberId = " + memberMemberId + ", " +
-                "categoryCategoryName = " + categoryCategoryName + ")";
+                "memberId = " + memberId + ", " +
+                "categoryId = " + categoryId + ", " +
+                "categoryName = " + categoryName + ")";
     }
 }

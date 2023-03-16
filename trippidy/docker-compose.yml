@@ -10,9 +10,10 @@ services:
       - "4848:4848" # admin
       - "9009:9009" # debug
     volumes:
-      - ./target/trippidy-v1.war:/opt/payara/appserver/glassfish/domains/domain1/autodeploy/trippidy-v1.war
+      - ./target/trippidy-1.0.0-SNAPSHOT.war:/opt/payara/appserver/glassfish/domains/domain1/autodeploy/trippidy-1.0.0-SNAPSHOT.war
     depends_on:
       - db
+      - liquibase
 
   db:
     container_name: db

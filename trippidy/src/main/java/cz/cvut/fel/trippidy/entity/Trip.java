@@ -1,13 +1,21 @@
-package cz.cvut.fel.trippidy.model;
+package cz.cvut.fel.trippidy.entity;
 
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@NamedQueries({
+        //@NamedQuery(name = "Trip.findByUserProfileId", query = "select t from Trip t join Member m on t.id = m.trip.id join UserProfile u where u.id = :userId"),
+        @NamedQuery(name = Trip.FIND_BY_USER_PROFILE_ID, query = "select m from Member m join UserProfile u on m.userProfile.id = u.id where u.id = :userId"),
+        //@NamedQuery(name = Trip.FIND_BY_USER_PROFILE_ID, query = "select m from Member m join UserProfile m.userProfile u where u.id = :userId"),
+}
+)
 public class Trip {
+    public static final String FIND_BY_USER_PROFILE_ID = "Trip.findByUserProfileId";
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
@@ -23,6 +31,14 @@ public class Trip {
 
     @Column(name = "date_to", nullable = false)
     private LocalDateTime dateTo;
+
+    public Trip() {
+        members = new ArrayList<>();
+    }
+
+    public void addMember(Member member) {
+        members.add(member);
+    }
 
     public LocalDateTime getDateTo() {
         return dateTo;

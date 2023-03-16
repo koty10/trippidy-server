@@ -1,19 +1,21 @@
 package cz.cvut.fel.trippidy.dto;
 
+import cz.cvut.fel.trippidy.entity.Trip;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link cz.cvut.fel.trippidy.model.Trip} entity
+ * A DTO for the {@link Trip} entity
  */
 public class TripDto implements Serializable {
-    private final int id;
-    private final String name;
-    private final Collection<MemberDto> members;
-    private final LocalDateTime dateFrom;
-    private final LocalDateTime dateTo;
+    private int id;
+    private String name;
+    private Collection<MemberDto> members;
+    private LocalDateTime dateFrom;
+    private LocalDateTime dateTo;
 
     public TripDto(int id, String name, Collection<MemberDto> members, LocalDateTime dateFrom, LocalDateTime dateTo) {
         this.id = id;
@@ -21,6 +23,9 @@ public class TripDto implements Serializable {
         this.members = members;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
+    }
+
+    public TripDto() {
     }
 
     public int getId() {

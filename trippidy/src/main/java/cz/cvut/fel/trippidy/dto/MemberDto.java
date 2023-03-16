@@ -1,31 +1,36 @@
 package cz.cvut.fel.trippidy.dto;
 
+import cz.cvut.fel.trippidy.entity.Member;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link cz.cvut.fel.trippidy.model.Member} entity
+ * A DTO for the {@link Member} entity
  */
 public class MemberDto implements Serializable {
-    private final int id;
-    private final String role;
-    private final boolean accepted;
-    private final Collection<ItemDto> items;
-    private final int tripTripId;
-    private final String userProfileUserProfileId;
-    private final String userProfileFirstname;
-    private final String userProfileLastname;
+    private int id;
+    private String role;
+    private boolean accepted;
+    private Collection<ItemDto> items;
+    private int tripId;
+    private String userProfileId;
+    private String userProfileFirstname;
+    private String userProfileLastname;
 
-    public MemberDto(int id, String role, boolean accepted, Collection<ItemDto> items, int tripTripId, String userProfileUserProfileId, String userProfileFirstname, String userProfileLastname) {
+    public MemberDto(int id, String role, boolean accepted, Collection<ItemDto> items, int tripId, String userProfileId, String userProfileFirstname, String userProfileLastname) {
         this.id = id;
         this.role = role;
         this.accepted = accepted;
         this.items = items;
-        this.tripTripId = tripTripId;
-        this.userProfileUserProfileId = userProfileUserProfileId;
+        this.tripId = tripId;
+        this.userProfileId = userProfileId;
         this.userProfileFirstname = userProfileFirstname;
         this.userProfileLastname = userProfileLastname;
+    }
+
+    public MemberDto() {
     }
 
     public int getId() {
@@ -44,12 +49,12 @@ public class MemberDto implements Serializable {
         return items;
     }
 
-    public int getTripTripId() {
-        return tripTripId;
+    public int getTripId() {
+        return tripId;
     }
 
-    public String getUserProfileUserProfileId() {
-        return userProfileUserProfileId;
+    public String getUserProfileId() {
+        return userProfileId;
     }
 
     public String getUserProfileFirstname() {
@@ -69,15 +74,15 @@ public class MemberDto implements Serializable {
                 Objects.equals(this.role, entity.role) &&
                 Objects.equals(this.accepted, entity.accepted) &&
                 Objects.equals(this.items, entity.items) &&
-                Objects.equals(this.tripTripId, entity.tripTripId) &&
-                Objects.equals(this.userProfileUserProfileId, entity.userProfileUserProfileId) &&
+                Objects.equals(this.tripId, entity.tripId) &&
+                Objects.equals(this.userProfileId, entity.userProfileId) &&
                 Objects.equals(this.userProfileFirstname, entity.userProfileFirstname) &&
                 Objects.equals(this.userProfileLastname, entity.userProfileLastname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, role, accepted, items, tripTripId, userProfileUserProfileId, userProfileFirstname, userProfileLastname);
+        return Objects.hash(id, role, accepted, items, tripId, userProfileId, userProfileFirstname, userProfileLastname);
     }
 
     @Override
@@ -87,8 +92,8 @@ public class MemberDto implements Serializable {
                 "role = " + role + ", " +
                 "accepted = " + accepted + ", " +
                 "items = " + items + ", " +
-                "tripTripId = " + tripTripId + ", " +
-                "userProfileUserProfileId = " + userProfileUserProfileId + ", " +
+                "tripId = " + tripId + ", " +
+                "userProfileId = " + userProfileId + ", " +
                 "userProfileFirstname = " + userProfileFirstname + ", " +
                 "userProfileLastname = " + userProfileLastname + ")";
     }

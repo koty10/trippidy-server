@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
     <persistence-unit name="trippidy" transaction-type="JTA">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>jdbc/trippidy</jta-data-source>
-        <class>cz.cvut.fel.trippidy.model.Category</class>
-        <class>cz.cvut.fel.trippidy.model.Item</class>
-        <class>cz.cvut.fel.trippidy.model.Member</class>
-        <class>cz.cvut.fel.trippidy.model.Trip</class>
-        <class>cz.cvut.fel.trippidy.model.UserProfile</class>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:postgresql://db:5432/postgres"/>
-            <property name="hibernate.connection.username" value="admin"/>
-            <property name="hibernate.connection.password" value="admin"/>
-            <!--            <property name="hibernate.hbm2ddl.auto" value="create"/>-->
+            <property name="eclipselink.logging.level" value="FINE"/>
         </properties>
     </persistence-unit>
 </persistence>

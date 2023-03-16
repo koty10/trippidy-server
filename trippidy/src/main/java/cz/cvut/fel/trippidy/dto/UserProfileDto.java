@@ -1,6 +1,6 @@
 package cz.cvut.fel.trippidy.dto;
 
-import cz.cvut.fel.trippidy.model.UserProfile;
+import cz.cvut.fel.trippidy.entity.UserProfile;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -10,16 +10,19 @@ import java.util.Objects;
  * A DTO for the {@link UserProfile} entity
  */
 public class UserProfileDto implements Serializable {
-    private final String id;
-    private final String firstname;
-    private final String lastname;
-    private final Collection<MemberDto> members;
+    private String id;
+    private String firstname;
+    private String lastname;
+    private Collection<MemberDto> members;
 
     public UserProfileDto(String id, String firstname, String lastname, Collection<MemberDto> members) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.members = members;
+    }
+
+    public UserProfileDto() {
     }
 
     public String getId() {

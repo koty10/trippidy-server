@@ -1,4 +1,4 @@
-package cz.cvut.fel.trippidy.model;
+package cz.cvut.fel.trippidy.entity;
 
 import javax.persistence.*;
 
