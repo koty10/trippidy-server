@@ -13,12 +13,14 @@ public class UserProfileDto implements Serializable {
     private String id;
     private String firstname;
     private String lastname;
+    private String image;
     private Collection<MemberDto> members;
 
-    public UserProfileDto(String id, String firstname, String lastname, Collection<MemberDto> members) {
+    public UserProfileDto(String id, String firstname, String lastname, String image, Collection<MemberDto> members) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.image = image;
         this.members = members;
     }
 
@@ -41,6 +43,10 @@ public class UserProfileDto implements Serializable {
         return members;
     }
 
+    public String getImage() {
+        return image;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -57,6 +63,10 @@ public class UserProfileDto implements Serializable {
         this.members = members;
     }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -65,12 +75,13 @@ public class UserProfileDto implements Serializable {
         return Objects.equals(this.id, entity.id) &&
                 Objects.equals(this.firstname, entity.firstname) &&
                 Objects.equals(this.lastname, entity.lastname) &&
+                Objects.equals(this.image, entity.image) &&
                 Objects.equals(this.members, entity.members);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstname, lastname, members);
+        return Objects.hash(id, firstname, lastname, image, members);
     }
 
     @Override
@@ -79,6 +90,7 @@ public class UserProfileDto implements Serializable {
                 "id = " + id + ", " +
                 "firstname = " + firstname + ", " +
                 "lastname = " + lastname + ", " +
+                "image = " + image + ", " +
                 "members = " + members + ")";
     }
 }

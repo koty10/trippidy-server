@@ -18,8 +18,9 @@ public class MemberDto implements Serializable {
     private String userProfileId;
     private String userProfileFirstname;
     private String userProfileLastname;
+    private String userProfileImage;
 
-    public MemberDto(int id, String role, boolean accepted, Collection<ItemDto> items, int tripId, String userProfileId, String userProfileFirstname, String userProfileLastname) {
+    public MemberDto(int id, String role, boolean accepted, Collection<ItemDto> items, int tripId, String userProfileId, String userProfileFirstname, String userProfileLastname, String userProfileImage) {
         this.id = id;
         this.role = role;
         this.accepted = accepted;
@@ -28,6 +29,7 @@ public class MemberDto implements Serializable {
         this.userProfileId = userProfileId;
         this.userProfileFirstname = userProfileFirstname;
         this.userProfileLastname = userProfileLastname;
+        this.userProfileImage = userProfileImage;
     }
 
     public MemberDto() {
@@ -65,6 +67,14 @@ public class MemberDto implements Serializable {
         return userProfileLastname;
     }
 
+    public String getUserProfileImage() {
+        return userProfileImage;
+    }
+
+    public boolean isAccepted() {
+        return accepted;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -97,6 +107,10 @@ public class MemberDto implements Serializable {
         this.userProfileLastname = userProfileLastname;
     }
 
+    public void setUserProfileImage(String userProfileImage) {
+        this.userProfileImage = userProfileImage;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -109,12 +123,13 @@ public class MemberDto implements Serializable {
                 Objects.equals(this.tripId, entity.tripId) &&
                 Objects.equals(this.userProfileId, entity.userProfileId) &&
                 Objects.equals(this.userProfileFirstname, entity.userProfileFirstname) &&
+                Objects.equals(this.userProfileImage, entity.userProfileImage) &&
                 Objects.equals(this.userProfileLastname, entity.userProfileLastname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, role, accepted, items, tripId, userProfileId, userProfileFirstname, userProfileLastname);
+        return Objects.hash(id, role, accepted, items, tripId, userProfileId, userProfileFirstname, userProfileLastname, userProfileImage);
     }
 
     @Override
@@ -127,6 +142,7 @@ public class MemberDto implements Serializable {
                 "tripId = " + tripId + ", " +
                 "userProfileId = " + userProfileId + ", " +
                 "userProfileFirstname = " + userProfileFirstname + ", " +
+                "userProfileImage = " + userProfileImage + ", " +
                 "userProfileLastname = " + userProfileLastname + ")";
     }
 }

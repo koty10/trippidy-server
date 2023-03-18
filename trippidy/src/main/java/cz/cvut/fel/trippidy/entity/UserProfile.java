@@ -20,8 +20,20 @@ public class UserProfile {
     @Basic
     @Column(name = "lastname", nullable = false, length = 128)
     private String lastname;
+    @Basic
+    @Column(name = "image", nullable = false, length = 1024)
+    private String image;
+
     @OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL)
     private Collection<Member> members;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getId() {
         return id;

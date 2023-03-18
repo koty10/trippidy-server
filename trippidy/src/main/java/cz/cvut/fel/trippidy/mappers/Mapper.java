@@ -52,6 +52,7 @@ public interface Mapper {
     @Mappings({
             @Mapping(source = "userProfile.id", target = "userProfileId"),
             @Mapping(source = "userProfile.firstname", target = "userProfileFirstname"),
+            @Mapping(source = "userProfile.image", target = "userProfileImage"),
             @Mapping(source = "trip.id", target = "tripId")
     })
     MemberDto toDto(Member member);
@@ -59,6 +60,7 @@ public interface Mapper {
             @Mapping(source = "userProfileId", target = "userProfile.id"),
             @Mapping(source = "userProfileFirstname", target = "userProfile.firstname"),
             @Mapping(source = "userProfileLastname", target = "userProfile.lastname"),
+            @Mapping(source = "userProfileImage", target = "userProfile.image"),
             @Mapping(source = "tripId", target = "trip.id")
     })
     Member toEntity(MemberDto memberDto);
