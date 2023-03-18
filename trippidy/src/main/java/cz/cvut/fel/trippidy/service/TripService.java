@@ -1,9 +1,11 @@
 package cz.cvut.fel.trippidy.service;
 
+import cz.cvut.fel.trippidy.dto.TripDto;
 import cz.cvut.fel.trippidy.entity.Member;
 import cz.cvut.fel.trippidy.entity.Trip;
 import cz.cvut.fel.trippidy.entity.UserProfile;
 import cz.cvut.fel.trippidy.entity.*;
+import cz.cvut.fel.trippidy.mappers.Mapper;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -19,22 +21,15 @@ public class TripService {
     @PersistenceContext
     EntityManager entityManager;
 
-    public List<Trip> findTrips(String userId) {
+    public List<TripDto> findTrips(String userId) {
         return entityManager.createNamedQuery(Trip.FIND_BY_USER_PROFILE_ID, Trip.class)
                 .setParameter("userId", userId)
-                .getResultList();
-
-//        return jpaStreamer.stream(UserProfile.class)
-//                .filter(UserProfile$.id.equal(userId))
-//                .findFirst()
-//                .orElseThrow()
-//                .getMembers()
-//                .stream()
-//                .map(Member::getTrip)
-//                .collect(Collectors.toList());
+                .getResultStream()
+                .map(Mapper.MAPPER::toDto)
+                .collect(Collectors.toList());
     }
 
-    public Trip createTrip(String userId, String name, LocalDateTime dateFrom, LocalDateTime dateTo) {
+    public TripDto createTrip(String userId, String name, LocalDateTime dateFrom, LocalDateTime dateTo) {
         //return null;
         UserProfile userProfile = entityManager.createNamedQuery(UserProfile.FIND_BY_ID, UserProfile.class)
                 .setParameter("userId", userId)
@@ -54,6 +49,6 @@ public class TripService {
 
         entityManager.persist(trip);
         //entityManager.persist(member);
-        return trip;
+        return Mapper.MAPPER.toDto(trip);
     }
 }

@@ -1,8 +1,10 @@
 package cz.cvut.fel.trippidy.resource;
 
 import cz.cvut.fel.trippidy.dto.TripDto;
+import cz.cvut.fel.trippidy.dto.UserProfileDto;
 import cz.cvut.fel.trippidy.mappers.Mapper;
 import cz.cvut.fel.trippidy.service.TripService;
+import cz.cvut.fel.trippidy.service.UserProfileService;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
@@ -13,25 +15,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import java.util.Collection;
 
-@Path("/v1/my/trip")
+@Path("/v1/my/userProfile")
 @RequestScoped
 @RolesAllowed({"user"})
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class MyTripResource {
+public class MyUserProfileResource {
     @EJB
-    TripService tripService;
+    UserProfileService userProfileService;
 
     @Context
     SecurityContext securityContext;
 
     @GET
-    public Collection<TripDto> trips() {
-        return tripService.findTrips(securityContext.getUserPrincipal().getName());
-    }
-
-    @POST
-    public TripDto createTrip(TripDto tripDto) {
-        return tripService.createTrip(securityContext.getUserPrincipal().getName(), tripDto.getName(), tripDto.getDateFrom(), tripDto.getDateTo());
+    public UserProfileDto userProfile() {
+        return userProfileService.findUserProfile(securityContext.getUserPrincipal().getName());
     }
 }
