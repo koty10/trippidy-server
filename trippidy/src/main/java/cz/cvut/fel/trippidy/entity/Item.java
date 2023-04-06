@@ -35,6 +35,21 @@ public class Item {
     @JoinColumn(name = "category_id_fk", referencedColumnName = "id", nullable = false)
     private Category category;
 
+    public Item(int id, String name, boolean isChecked, int amount, boolean isPrivate, boolean isShared, int price, Member member, Category category) {
+        this.id = id;
+        this.name = name;
+        this.isChecked = isChecked;
+        this.amount = amount;
+        this.isPrivate = isPrivate;
+        this.isShared = isShared;
+        this.price = price;
+        this.member = member;
+        this.category = category;
+    }
+
+    public Item() {
+    }
+
     public int getId() {
         return id;
     }
@@ -51,16 +66,8 @@ public class Item {
         this.name = name;
     }
 
-    public boolean isChecked() {
-        return isChecked;
-    }
-
     public boolean getIsChecked() {
         return isChecked;
-    }
-
-    public void setChecked(boolean checked) {
-        isChecked = checked;
     }
 
     public int getAmount() {
@@ -71,28 +78,12 @@ public class Item {
         this.amount = amount;
     }
 
-    public boolean isPrivate() {
-        return isPrivate;
-    }
-
     public boolean getIsPrivate() {
         return isPrivate;
     }
 
-    public void setPrivate(boolean aPrivate) {
-        isPrivate = aPrivate;
-    }
-
-    public boolean isShared() {
-        return isShared;
-    }
-
     public boolean getIsShared() {
         return isShared;
-    }
-
-    public void setShared(boolean shared) {
-        isShared = shared;
     }
 
     public int getPrice() {
@@ -101,6 +92,30 @@ public class Item {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public boolean isShared() {
+        return isShared;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+
+    public void setPrivate(boolean aPrivate) {
+        isPrivate = aPrivate;
+    }
+
+    public void setShared(boolean shared) {
+        isShared = shared;
     }
 
     @Override

@@ -84,20 +84,20 @@ public class ItemDto implements Serializable {
         this.name = name;
     }
 
-    public void setChecked(boolean checked) {
-        isChecked = checked;
+    public void setIsChecked(boolean isChecked) {
+        this.isChecked = isChecked;
     }
 
     public void setAmount(int amount) {
         this.amount = amount;
     }
 
-    public void setPrivate(boolean aPrivate) {
-        isPrivate = aPrivate;
+    public void setIsPrivate(boolean isPrivate) {
+        this.isPrivate = isPrivate;
     }
 
-    public void setShared(boolean shared) {
-        isShared = shared;
+    public void seIsShared(boolean isShared) {
+        this.isShared = isShared;
     }
 
     public void setPrice(int price) {

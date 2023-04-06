@@ -42,8 +42,16 @@ public interface Mapper {
         category.getItems().forEach(item -> item.setCategory(category));
     }
 
+    @Mappings({
+            @Mapping(source = "category.id", target = "categoryId"),
+            @Mapping(source = "category.name", target = "categoryName"),
+    })
     ItemDto toDto(Item item);
 
+    @Mappings({
+            @Mapping(source = "categoryId", target = "category.id"),
+            @Mapping(source = "categoryName", target = "category.name"),
+    })
     Item toEntity(ItemDto itemDto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
@@ -52,6 +60,7 @@ public interface Mapper {
     @Mappings({
             @Mapping(source = "userProfile.id", target = "userProfileId"),
             @Mapping(source = "userProfile.firstname", target = "userProfileFirstname"),
+            @Mapping(source = "userProfile.lastname", target = "userProfileLastname"),
             @Mapping(source = "userProfile.image", target = "userProfileImage"),
             @Mapping(source = "trip.id", target = "tripId")
     })
