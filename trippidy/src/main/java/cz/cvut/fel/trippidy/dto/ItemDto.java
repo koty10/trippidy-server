@@ -2,6 +2,7 @@ package cz.cvut.fel.trippidy.dto;
 
 import cz.cvut.fel.trippidy.entity.Item;
 
+import javax.json.bind.annotation.JsonbProperty;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -44,21 +45,10 @@ public class ItemDto implements Serializable {
         return name;
     }
 
-    public boolean getIsChecked() {
-        return isChecked;
-    }
-
     public int getAmount() {
         return amount;
     }
 
-    public boolean getIsPrivate() {
-        return isPrivate;
-    }
-
-    public boolean getIsShared() {
-        return isShared;
-    }
 
     public int getPrice() {
         return price;
@@ -84,20 +74,8 @@ public class ItemDto implements Serializable {
         this.name = name;
     }
 
-    public void setIsChecked(boolean isChecked) {
-        this.isChecked = isChecked;
-    }
-
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public void setIsPrivate(boolean isPrivate) {
-        this.isPrivate = isPrivate;
-    }
-
-    public void seIsShared(boolean isShared) {
-        this.isShared = isShared;
     }
 
     public void setPrice(int price) {
@@ -114,6 +92,33 @@ public class ItemDto implements Serializable {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    @JsonbProperty("isChecked")
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+
+    @JsonbProperty("isPrivate")
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
+    public void setPrivate(boolean aPrivate) {
+        isPrivate = aPrivate;
+    }
+
+    @JsonbProperty("isShared")
+    public boolean isShared() {
+        return isShared;
+    }
+
+    public void setShared(boolean shared) {
+        isShared = shared;
     }
 
     @Override

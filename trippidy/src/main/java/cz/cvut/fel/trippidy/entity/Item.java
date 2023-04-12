@@ -98,20 +98,20 @@ public class Item {
         return isChecked;
     }
 
-    public boolean isPrivate() {
-        return isPrivate;
-    }
-
-    public boolean isShared() {
-        return isShared;
-    }
-
     public void setChecked(boolean checked) {
         isChecked = checked;
     }
 
+    public boolean isPrivate() {
+        return isPrivate;
+    }
+
     public void setPrivate(boolean aPrivate) {
         isPrivate = aPrivate;
+    }
+
+    public boolean isShared() {
+        return isShared;
     }
 
     public void setShared(boolean shared) {

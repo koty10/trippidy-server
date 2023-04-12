@@ -31,7 +31,7 @@ public class ItemService {
         item.setCategory(item.getCategory());
         item.setPrice(itemDto.getPrice());
         item.setName(itemDto.getName());
-        item.setChecked(itemDto.getIsChecked());
+        item.setChecked(itemDto.isChecked());
         item.setPrivate(item.isPrivate());
         item.setShared(item.getIsShared());
 

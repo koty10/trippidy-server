@@ -45,12 +45,14 @@ public interface Mapper {
     @Mappings({
             @Mapping(source = "category.id", target = "categoryId"),
             @Mapping(source = "category.name", target = "categoryName"),
+            @Mapping(source = "member.id", target = "memberId")
     })
     ItemDto toDto(Item item);
 
     @Mappings({
             @Mapping(source = "categoryId", target = "category.id"),
             @Mapping(source = "categoryName", target = "category.name"),
+            @Mapping(source = "categoryId", target = "member.id")
     })
     Item toEntity(ItemDto itemDto);
 
