@@ -14,7 +14,7 @@ import java.util.Objects;
  * A DTO for the {@link Trip} entity
  */
 public class TripDto implements Serializable {
-    private int id;
+    private String id;
     private String name;
     private Collection<MemberDto> members;
     //@JsonbDateFormat(value = "yyyy-MM-dd HH:mm:ss")
@@ -22,7 +22,7 @@ public class TripDto implements Serializable {
     //@JsonbDateFormat(value = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateTo;
 
-    public TripDto(int id, String name, Collection<MemberDto> members, LocalDateTime dateFrom, LocalDateTime dateTo) {
+    public TripDto(String id, String name, Collection<MemberDto> members, LocalDateTime dateFrom, LocalDateTime dateTo) {
         this.id = id;
         this.name = name;
         this.members = members;
@@ -33,7 +33,7 @@ public class TripDto implements Serializable {
     public TripDto() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -53,7 +53,7 @@ public class TripDto implements Serializable {
         return dateTo;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

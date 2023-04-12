@@ -29,26 +29,32 @@ public class TripService {
                 .collect(Collectors.toList());
     }
 
-    public TripDto createTrip(String userId, String name, LocalDateTime dateFrom, LocalDateTime dateTo) {
+    // TODO it does not include userProfileFirstname etc in the response - maybe i have to load it somehow
+    public TripDto createTrip(String userId, TripDto tripDto) {
         //return null;
         UserProfile userProfile = entityManager.createNamedQuery(UserProfile.FIND_BY_ID, UserProfile.class)
                 .setParameter("userId", userId)
                 .getSingleResult();
 
-        Member member = new Member();
-        member.setAccepted(true);
-        member.setRole("admin");
-        member.setUserProfile(userProfile);
+        var newTrip = Mapper.MAPPER.toEntity(tripDto);
+        entityManager.persist(newTrip);
 
-        Trip trip = new Trip();
-        trip.setName(name);
-        trip.setDateFrom(dateFrom);
-        trip.setDateTo(dateTo);
-        trip.addMember(member);
-        member.setTrip(trip);
+        return Mapper.MAPPER.toDto(newTrip);
 
-        entityManager.persist(trip);
-        //entityManager.persist(member);
-        return Mapper.MAPPER.toDto(trip);
+//        Member member = new Member();
+//        member.setAccepted(true);
+//        member.setRole("admin");
+//        member.setUserProfile(userProfile);
+//
+//        Trip trip = new Trip();
+//        trip.setName(tripDto.getName());
+//        trip.setDateFrom(tripDto.getDateFrom());
+//        trip.setDateTo(tripDto.getDateTo());
+//        trip.addMember(member);
+//        member.setTrip(trip);
+//
+//        entityManager.persist(trip);
+//        //entityManager.persist(member);
+//        return Mapper.MAPPER.toDto(trip);
     }
 }

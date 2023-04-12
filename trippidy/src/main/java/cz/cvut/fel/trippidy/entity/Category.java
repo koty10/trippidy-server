@@ -6,22 +6,27 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = Category.FIND_BY_NAME, query = "select c from Category c where c.name = :name"),
+}
+)
 public class Category {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public static final String FIND_BY_NAME = "Category.findByName";
+
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    private String id;
     @Basic
     @Column(name = "name", nullable = false)
     private String name;
     @OneToMany(mappedBy = "category")
     private Collection<Item> items;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

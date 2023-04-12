@@ -39,6 +39,7 @@ public interface Mapper {
 
     @AfterMapping
     default void linkItems(@MappingTarget Category category) {
+        if (category.getItems() == null) return;
         category.getItems().forEach(item -> item.setCategory(category));
     }
 
@@ -52,7 +53,7 @@ public interface Mapper {
     @Mappings({
             @Mapping(source = "categoryId", target = "category.id"),
             @Mapping(source = "categoryName", target = "category.name"),
-            @Mapping(source = "categoryId", target = "member.id")
+            @Mapping(source = "memberId", target = "member.id")
     })
     Item toEntity(ItemDto itemDto);
 

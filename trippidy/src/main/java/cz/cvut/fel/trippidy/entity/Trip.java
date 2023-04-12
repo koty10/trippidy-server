@@ -9,15 +9,14 @@ import java.util.Objects;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = Trip.FIND_BY_USER_PROFILE_ID, query = "select t from Trip t join t.members m join m.userProfile u where u.id = :userId"),
+        @NamedQuery(name = Trip.FIND_BY_USER_PROFILE_ID, query = "select distinct t from Trip t join t.members m join m.userProfile u join m.items i join i.category c where u.id = :userId"),
 }
 )
 public class Trip {
     public static final String FIND_BY_USER_PROFILE_ID = "Trip.findByUserProfileId";
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    private String id;
     @Basic
     @Column(name = "name", nullable = false, length = 128)
     private String name;
@@ -54,11 +53,11 @@ public class Trip {
         this.dateFrom = dateFrom;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

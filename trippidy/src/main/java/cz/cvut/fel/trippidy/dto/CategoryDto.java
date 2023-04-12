@@ -10,11 +10,11 @@ import java.util.Objects;
  * A DTO for the {@link Category} entity
  */
 public class CategoryDto implements Serializable {
-    private int id;
+    private String id;
     private String name;
     private Collection<ItemDto> items;
 
-    public CategoryDto(int id, String name, Collection<ItemDto> items) {
+    public CategoryDto(String id, String name, Collection<ItemDto> items) {
         this.id = id;
         this.name = name;
         this.items = items;
@@ -23,7 +23,7 @@ public class CategoryDto implements Serializable {
     public CategoryDto() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -35,7 +35,7 @@ public class CategoryDto implements Serializable {
         return items;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

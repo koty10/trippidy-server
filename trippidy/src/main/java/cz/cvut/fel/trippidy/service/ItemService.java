@@ -2,10 +2,7 @@ package cz.cvut.fel.trippidy.service;
 
 import cz.cvut.fel.trippidy.dto.ItemDto;
 import cz.cvut.fel.trippidy.dto.TripDto;
-import cz.cvut.fel.trippidy.entity.Item;
-import cz.cvut.fel.trippidy.entity.Member;
-import cz.cvut.fel.trippidy.entity.Trip;
-import cz.cvut.fel.trippidy.entity.UserProfile;
+import cz.cvut.fel.trippidy.entity.*;
 import cz.cvut.fel.trippidy.mappers.Mapper;
 
 import javax.ejb.Stateless;
@@ -34,6 +31,24 @@ public class ItemService {
         item.setChecked(itemDto.isChecked());
         item.setPrivate(item.isPrivate());
         item.setShared(item.getIsShared());
+
+        entityManager.persist(item);
+        return Mapper.MAPPER.toDto(item);
+    }
+
+    public ItemDto createItem(String userId, ItemDto itemDto) throws Exception { //todo remove userId
+        if (entityManager.find(Item.class, itemDto.getId()) != null) throw new Exception("Element already exists");
+
+        Item item = Mapper.MAPPER.toEntity(itemDto);
+        var category = entityManager.createNamedQuery(Category.FIND_BY_NAME, Category.class)
+                .setParameter("name", item.getCategory().getName())
+                .getResultStream()
+                .findFirst();
+        if (category.isPresent()) {
+            item.setCategory(category.get());
+        } else {
+            entityManager.persist(item.getCategory());
+        }
 
         entityManager.persist(item);
         return Mapper.MAPPER.toDto(item);

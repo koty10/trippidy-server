@@ -6,10 +6,9 @@ import java.util.Objects;
 
 @Entity
 public class Item {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    private String id;
     @Basic
     @Column(name = "name", nullable = false, length = 128)
     private String name;
@@ -35,7 +34,7 @@ public class Item {
     @JoinColumn(name = "category_id_fk", referencedColumnName = "id", nullable = false)
     private Category category;
 
-    public Item(int id, String name, boolean isChecked, int amount, boolean isPrivate, boolean isShared, int price, Member member, Category category) {
+    public Item(String id, String name, boolean isChecked, int amount, boolean isPrivate, boolean isShared, int price, Member member, Category category) {
         this.id = id;
         this.name = name;
         this.isChecked = isChecked;
@@ -50,11 +49,11 @@ public class Item {
     public Item() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

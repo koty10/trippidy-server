@@ -10,17 +10,17 @@ import java.util.Objects;
  * A DTO for the {@link Member} entity
  */
 public class MemberDto implements Serializable {
-    private int id;
+    private String id;
     private String role;
     private boolean accepted;
     private Collection<ItemDto> items;
-    private int tripId;
+    private String tripId;
     private String userProfileId;
     private String userProfileFirstname;
     private String userProfileLastname;
     private String userProfileImage;
 
-    public MemberDto(int id, String role, boolean accepted, Collection<ItemDto> items, int tripId, String userProfileId, String userProfileFirstname, String userProfileLastname, String userProfileImage) {
+    public MemberDto(String id, String role, boolean accepted, Collection<ItemDto> items, String tripId, String userProfileId, String userProfileFirstname, String userProfileLastname, String userProfileImage) {
         this.id = id;
         this.role = role;
         this.accepted = accepted;
@@ -35,7 +35,7 @@ public class MemberDto implements Serializable {
     public MemberDto() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -51,7 +51,7 @@ public class MemberDto implements Serializable {
         return items;
     }
 
-    public int getTripId() {
+    public String getTripId() {
         return tripId;
     }
 
@@ -75,7 +75,7 @@ public class MemberDto implements Serializable {
         return accepted;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -91,7 +91,7 @@ public class MemberDto implements Serializable {
         this.items = items;
     }
 
-    public void setTripId(int tripId) {
+    public void setTripId(String tripId) {
         this.tripId = tripId;
     }
 

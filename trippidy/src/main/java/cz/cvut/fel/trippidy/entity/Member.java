@@ -7,10 +7,9 @@ import java.util.Objects;
 
 @Entity
 public class Member {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
-    private int id;
+    private String id;
     @Basic
     @Column(name = "role", nullable = false, length = 64)
     private String role;
@@ -26,11 +25,11 @@ public class Member {
     @JoinColumn(name = "user_id_fk", referencedColumnName = "id", nullable = false)
     private UserProfile userProfile;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

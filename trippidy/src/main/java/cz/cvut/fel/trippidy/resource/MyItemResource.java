@@ -33,8 +33,13 @@ public class MyItemResource {
     @Context
     SecurityContext securityContext;
 
-    @POST
+    @PUT
     public ItemDto updateItem(@Context HttpServletRequest request, ItemDto itemDto) throws AuthException {
         return itemService.updateItem(securityContext.getUserPrincipal().getName(), itemDto);
+    }
+
+    @POST
+    public ItemDto createItem(@Context HttpServletRequest request, ItemDto itemDto) throws Exception {
+        return itemService.createItem(securityContext.getUserPrincipal().getName(), itemDto);
     }
 }
