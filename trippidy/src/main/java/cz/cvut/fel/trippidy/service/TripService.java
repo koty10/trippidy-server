@@ -57,4 +57,8 @@ public class TripService {
 //        //entityManager.persist(member);
 //        return Mapper.MAPPER.toDto(trip);
     }
+
+    public TripDto findTripById(String id) {
+        return Mapper.MAPPER.toDto(entityManager.find(Trip.class, id));
+    }
 }

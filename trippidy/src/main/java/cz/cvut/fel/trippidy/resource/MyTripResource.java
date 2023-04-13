@@ -32,6 +32,7 @@ public class MyTripResource {
 
     @POST
     public TripDto createTrip(TripDto tripDto) {
-        return tripService.createTrip(securityContext.getUserPrincipal().getName(), tripDto);
+        var trip = tripService.createTrip(securityContext.getUserPrincipal().getName(), tripDto);
+        return tripService.findTripById(trip.getId());
     }
 }
