@@ -9,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = Trip.FIND_BY_USER_PROFILE_ID, query = "select distinct t from Trip t join t.members m join m.userProfile u join m.items i join i.category c where u.id = :userId"),
+        @NamedQuery(name = Trip.FIND_BY_USER_PROFILE_ID, query = "select distinct t from Trip t join t.members m join m.userProfile u left join m.items i left join i.category c where u.id = :userId"),
 }
 )
 public class Trip {
