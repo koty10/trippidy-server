@@ -51,6 +51,9 @@ public class ItemService {
         }
 
         entityManager.persist(item);
+        var member = entityManager.find(Member.class, item.getMember().getId());
+        member.getItems().add(item);
+        entityManager.persist(member);
         return Mapper.MAPPER.toDto(item);
     }
 }
