@@ -31,4 +31,9 @@ public class MyMemberResource {
     public MemberDto updateMember(@Context HttpServletRequest request, MemberDto memberDto) throws AuthException {
         return memberService.updateMember(securityContext.getUserPrincipal().getName(), memberDto);
     }
+
+    @POST
+    public MemberDto createMember(@Context HttpServletRequest request, MemberDto memberDto) throws Exception {
+        return memberService.createMember(securityContext.getUserPrincipal().getName(), memberDto);
+    }
 }

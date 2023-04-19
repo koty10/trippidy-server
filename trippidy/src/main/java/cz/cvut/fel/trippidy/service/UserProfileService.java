@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 @Stateless
@@ -22,5 +23,12 @@ public class UserProfileService {
         return Mapper.MAPPER.toDto(entityManager.createNamedQuery(UserProfile.FIND_BY_ID, UserProfile.class)
                 .setParameter("userId", userId)
                 .getSingleResult());
+    }
+
+    public Collection<UserProfileDto> findUserProfileByQuery(String userId, String query) {
+        return Mapper.MAPPER.toDto1(entityManager.createNamedQuery(UserProfile.FIND_BY_QUERY, UserProfile.class)
+                .setParameter("query", "%" + query + "%")
+                .setParameter("userId", userId)
+                .getResultList());
     }
 }

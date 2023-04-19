@@ -8,9 +8,11 @@ import java.util.Objects;
 @Entity
 @NamedQueries({
         @NamedQuery(name = UserProfile.FIND_BY_ID, query = "select u from UserProfile u where u.id = :userId"),
+        @NamedQuery(name = UserProfile.FIND_BY_QUERY, query = "SELECT u FROM UserProfile u WHERE LOWER(CONCAT(u.firstname, ' ', u.lastname)) LIKE LOWER(:query) AND u.id <> :userId"),
 })
 public class UserProfile {
     public static final String FIND_BY_ID = "UserProfile.findById";
+    public static final String FIND_BY_QUERY = "UserProfile.findByQuery";
     @Id
     @Column(name = "id", nullable = false)
     private String id;

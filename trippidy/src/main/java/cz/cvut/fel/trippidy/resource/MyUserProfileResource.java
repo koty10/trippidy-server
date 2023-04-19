@@ -31,4 +31,10 @@ public class MyUserProfileResource {
     public UserProfileDto userProfile() {
         return userProfileService.findUserProfile(securityContext.getUserPrincipal().getName());
     }
+
+    @GET
+    @Path("{query}")
+    public Collection<UserProfileDto> userProfile(@PathParam("query") String query) {
+        return userProfileService.findUserProfileByQuery(securityContext.getUserPrincipal().getName(), query);
+    }
 }
