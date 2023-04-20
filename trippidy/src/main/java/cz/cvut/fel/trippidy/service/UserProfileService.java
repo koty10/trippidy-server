@@ -10,10 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Stateless
@@ -23,9 +20,19 @@ public class UserProfileService {
     EntityManager entityManager;
 
     public UserProfileDto findUserProfile(String userId) {
-        return Mapper.MAPPER.toDto(entityManager.createNamedQuery(UserProfile.FIND_BY_ID, UserProfile.class)
-                .setParameter("userId", userId)
-                .getSingleResult());
+        try {
+            return Mapper.MAPPER.toDto(entityManager.createNamedQuery(UserProfile.FIND_BY_ID, UserProfile.class)
+                    .setParameter("userId", userId)
+                    .getSingleResult());
+        } catch (NoSuchElementException exception) {
+            UserProfile newUserProfile = new UserProfile();
+            newUserProfile.setId(userId);
+            newUserProfile.setFirstname("autoJmeno");
+            newUserProfile.setLastname("autoPrijmeni");
+            newUserProfile.setImage("https://www.gravatar.com/avatar/00000000000000000000000000000000?d=retro&f=y");
+            entityManager.persist(newUserProfile);
+            return Mapper.MAPPER.toDto(newUserProfile);
+        }
     }
 
     public Collection<UserProfileDto> findUserProfileByQuery(String userId, String query, String tripId) {
