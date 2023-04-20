@@ -59,7 +59,7 @@ public class UserProfileService {
         if (!userProfile.getId().equals(userId)) throw new AuthException("User not authorized to edit this userProfile.");
         userProfile.setFirstname(userProfileDto.getFirstname());
         userProfile.setLastname(userProfileDto.getLastname());
-        entityManager.persist(userProfileDto);
+        entityManager.persist(userProfile);
         return Mapper.MAPPER.toDto(userProfile);
     }
 }
