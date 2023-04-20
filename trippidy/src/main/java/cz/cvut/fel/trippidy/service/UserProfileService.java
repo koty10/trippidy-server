@@ -10,8 +10,11 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Stateless
 public class UserProfileService {
@@ -25,10 +28,14 @@ public class UserProfileService {
                 .getSingleResult());
     }
 
-    public Collection<UserProfileDto> findUserProfileByQuery(String userId, String query) {
+    public Collection<UserProfileDto> findUserProfileByQuery(String userId, String query, String tripId) {
+        var trip = entityManager.find(Trip.class, tripId);
         return Mapper.MAPPER.toDto1(entityManager.createNamedQuery(UserProfile.FIND_BY_QUERY, UserProfile.class)
                 .setParameter("query", "%" + query + "%")
                 .setParameter("userId", userId)
-                .getResultList());
+                .getResultStream()
+                .filter(userProfile -> userProfile.getMembers().stream().noneMatch(trip.getMembers()::contains))
+                .collect(Collectors.toList())
+        );
     }
 }
