@@ -8,6 +8,7 @@ import cz.cvut.fel.trippidy.mappers.Mapper;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -24,7 +25,7 @@ public class UserProfileService {
             return Mapper.MAPPER.toDto(entityManager.createNamedQuery(UserProfile.FIND_BY_ID, UserProfile.class)
                     .setParameter("userId", userId)
                     .getSingleResult());
-        } catch (NoSuchElementException exception) {
+        } catch (NoResultException exception) {
             UserProfile newUserProfile = new UserProfile();
             newUserProfile.setId(userId);
             newUserProfile.setFirstname("autoJmeno");
