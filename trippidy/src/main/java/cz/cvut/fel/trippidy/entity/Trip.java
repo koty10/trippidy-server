@@ -23,10 +23,10 @@ public class Trip {
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
     private Collection<Member> members;
 
-    @Column(name = "date_from", nullable = false)
+    @Column(name = "date_from")
     private LocalDateTime dateFrom;
 
-    @Column(name = "date_to", nullable = false)
+    @Column(name = "date_to")
     private LocalDateTime dateTo;
 
     public Trip() {
