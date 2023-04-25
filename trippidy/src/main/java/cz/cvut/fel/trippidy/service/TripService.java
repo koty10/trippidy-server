@@ -65,11 +65,11 @@ public class TripService {
     }
 
     public TripDto deleteTrip(String userId, String id) throws AuthException {
-        UserProfile userProfile = entityManager.find(UserProfile.class, id);
+        UserProfile userProfile = entityManager.find(UserProfile.class, userId);
         boolean isOwner = false;
         for (var m : userProfile.getMembers()) {
             var u = m.getUserProfile();
-            if (u.getId().equals(id) && m.getRole().equals(MemberRole.admin.name())) isOwner = true;
+            if (u.getId().equals(userId) && m.getRole().equals(MemberRole.admin.name())) isOwner = true;
         }
         if (!isOwner) throw new AuthException("User not authorized to edit this item.");
 
