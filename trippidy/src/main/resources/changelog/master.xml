@@ -6,6 +6,7 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.13.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
     <include file="changelog/changes/22-01-changelog.xml"/>
+    <include file="changelog/changes/25-01-changelog.xml"/>
     <changeSet id="1681301794378-1" author="koten (generated)">
         <createTable tableName="Category">
             <column name="id" type="VARCHAR(255)">

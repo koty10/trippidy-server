@@ -29,7 +29,7 @@ public class Trip {
     @Column(name = "date_to")
     private LocalDateTime dateTo;
 
-    @Column(name = "isDeleted")
+    @Column(name = "isDeleted", nullable = false)
     private boolean isDeleted;
 
     public Trip() {
