@@ -5,6 +5,7 @@ import cz.cvut.fel.trippidy.entity.Member;
 import cz.cvut.fel.trippidy.entity.Trip;
 import cz.cvut.fel.trippidy.entity.UserProfile;
 import cz.cvut.fel.trippidy.entity.*;
+import cz.cvut.fel.trippidy.enums.MemberRole;
 import cz.cvut.fel.trippidy.mappers.Mapper;
 
 import javax.ejb.Stateless;
@@ -68,7 +69,7 @@ public class TripService {
         boolean isOwner = false;
         for (var m : userProfile.getMembers()) {
             var u = m.getUserProfile();
-            if (u.getId().equals(id) && m.getRole().equals("admin")) isOwner = true;
+            if (u.getId().equals(id) && m.getRole().equals(MemberRole.admin.name())) isOwner = true;
         }
         if (!isOwner) throw new AuthException("User not authorized to edit this item.");
 
