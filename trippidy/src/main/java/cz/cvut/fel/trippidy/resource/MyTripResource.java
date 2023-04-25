@@ -7,6 +7,7 @@ import cz.cvut.fel.trippidy.service.TripService;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.security.auth.message.AuthException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -34,5 +35,11 @@ public class MyTripResource {
     public TripDto createTrip(TripDto tripDto) {
         var trip = tripService.createTrip(securityContext.getUserPrincipal().getName(), tripDto);
         return tripService.findTripById(trip.getId());
+    }
+
+    @DELETE
+    @Path("{id}")
+    public TripDto deleteTrip(@PathParam("id") String id) throws AuthException {
+        return tripService.deleteTrip(securityContext.getUserPrincipal().getName(), id);
     }
 }

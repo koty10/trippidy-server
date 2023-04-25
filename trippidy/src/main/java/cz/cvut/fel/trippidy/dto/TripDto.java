@@ -21,6 +21,7 @@ public class TripDto implements Serializable {
     private LocalDateTime dateFrom;
     //@JsonbDateFormat(value = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateTo;
+    private boolean isDeleted;
 
     public TripDto(String id, String name, Collection<MemberDto> members, LocalDateTime dateFrom, LocalDateTime dateTo) {
         this.id = id;
@@ -31,6 +32,14 @@ public class TripDto implements Serializable {
     }
 
     public TripDto() {
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     public String getId() {

@@ -29,12 +29,23 @@ public class Trip {
     @Column(name = "date_to")
     private LocalDateTime dateTo;
 
+    @Column(name = "isDeleted")
+    private boolean isDeleted;
+
     public Trip() {
         members = new ArrayList<>();
     }
 
     public void addMember(Member member) {
         members.add(member);
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     public LocalDateTime getDateTo() {

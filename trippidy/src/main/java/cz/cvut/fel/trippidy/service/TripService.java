@@ -10,6 +10,7 @@ import cz.cvut.fel.trippidy.mappers.Mapper;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.security.auth.message.AuthException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -60,5 +61,20 @@ public class TripService {
 
     public TripDto findTripById(String id) {
         return Mapper.MAPPER.toDto(entityManager.find(Trip.class, id));
+    }
+
+    public TripDto deleteTrip(String userId, String id) throws AuthException {
+        UserProfile userProfile = entityManager.find(UserProfile.class, id);
+        boolean isOwner = false;
+        for (var m : userProfile.getMembers()) {
+            var u = m.getUserProfile();
+            if (u.getId().equals(id) && m.getRole().equals("admin")) isOwner = true;
+        }
+        if (!isOwner) throw new AuthException("User not authorized to edit this item.");
+
+        var trip = entityManager.find(Trip.class, id);
+        trip.setDeleted(true);
+        entityManager.persist(trip);
+        return Mapper.MAPPER.toDto(trip);
     }
 }
