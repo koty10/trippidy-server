@@ -3,6 +3,7 @@ package cz.cvut.fel.trippidy.dto;
 import cz.cvut.fel.trippidy.entity.Trip;
 
 import javax.json.bind.annotation.JsonbDateFormat;
+import javax.json.bind.annotation.JsonbProperty;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapters;
 import java.io.Serializable;
@@ -34,10 +35,12 @@ public class TripDto implements Serializable {
     public TripDto() {
     }
 
+    @JsonbProperty("isDeleted")
     public boolean isDeleted() {
         return isDeleted;
     }
 
+    @JsonbProperty("isDeleted")
     public void setDeleted(boolean deleted) {
         isDeleted = deleted;
     }
