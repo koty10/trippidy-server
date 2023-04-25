@@ -29,6 +29,7 @@ public class Trip {
     @Column(name = "date_to")
     private LocalDateTime dateTo;
 
+    @Basic
     @Column(name = "isDeleted", nullable = false)
     private boolean isDeleted;
 

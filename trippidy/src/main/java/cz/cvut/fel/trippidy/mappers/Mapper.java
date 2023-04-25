@@ -12,7 +12,7 @@ public interface Mapper {
     Mapper MAPPER = Mappers.getMapper(Mapper.class);
 
     Trip toEntity(TripDto tripDto);
-
+    
     TripDto toDto(Trip trip);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

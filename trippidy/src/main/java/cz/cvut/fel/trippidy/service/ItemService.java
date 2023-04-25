@@ -30,7 +30,7 @@ public class ItemService {
         item.setName(itemDto.getName());
         item.setChecked(itemDto.isChecked());
         item.setPrivate(item.isPrivate());
-        item.setShared(item.getIsShared());
+        item.setShared(item.isShared());
 
         entityManager.persist(item);
         return Mapper.MAPPER.toDto(item);

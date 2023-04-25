@@ -65,24 +65,12 @@ public class Item {
         this.name = name;
     }
 
-    public boolean getIsChecked() {
-        return isChecked;
-    }
-
     public int getAmount() {
         return amount;
     }
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    public boolean getIsPrivate() {
-        return isPrivate;
-    }
-
-    public boolean getIsShared() {
-        return isShared;
     }
 
     public int getPrice() {
