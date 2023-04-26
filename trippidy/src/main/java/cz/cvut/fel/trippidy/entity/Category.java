@@ -17,7 +17,7 @@ public class Category {
     @Column(name = "id", nullable = false)
     private String id;
     @Basic
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, length = 128)
     private String name;
     @OneToMany(mappedBy = "category")
     private Collection<Item> items;

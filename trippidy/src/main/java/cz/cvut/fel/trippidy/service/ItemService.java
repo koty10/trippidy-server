@@ -32,7 +32,11 @@ public class ItemService {
         item.setPrivate(item.isPrivate());
         item.setShared(item.isShared());
 
+        var category = item.getCategory();
+        category.setName(itemDto.getCategoryName());
+
         entityManager.persist(item);
+        entityManager.persist(category);
         return Mapper.MAPPER.toDto(item);
     }
 
