@@ -68,8 +68,7 @@ public class TripService {
         UserProfile userProfile = entityManager.find(UserProfile.class, userId);
         boolean isOwner = false;
         for (var m : userProfile.getMembers()) {
-            var u = m.getUserProfile();
-            if (u.getId().equals(userId) && m.getRole().equals(MemberRole.admin.name())) isOwner = true;
+            if (m.getRole().equals(MemberRole.admin.name()) && m.getTrip().getId().equals(id)) isOwner = true;
         }
         if (!isOwner) throw new AuthException("User not authorized to edit this item.");
 
