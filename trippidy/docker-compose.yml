@@ -10,7 +10,7 @@ services:
       - "9648:4848" # admin
       - "9690:9009" # debug
     volumes:
-      - ${PWD}/target/trippidy-1.0.0-SNAPSHOT.war:/opt/payara/appserver/glassfish/domains/domain1/autodeploy/trippidy-1.0.0-SNAPSHOT.war
+      - ./target/trippidy-1.0.0-SNAPSHOT.war:/opt/payara/appserver/glassfish/domains/domain1/autodeploy/trippidy-1.0.0-SNAPSHOT.war
     depends_on:
       - db
       - liquibase
@@ -33,7 +33,7 @@ services:
     depends_on:
       - db
     volumes:
-      - ${PWD}/src/main/resources/changelog/:/liquibase/changelog/
+      - ./src/main/resources/changelog/:/liquibase/changelog/
     command: --defaults-file=/liquibase/changelog/local.properties update
 
 volumes:
