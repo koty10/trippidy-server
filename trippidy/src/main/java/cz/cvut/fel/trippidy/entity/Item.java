@@ -31,7 +31,7 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "member_id_fk", referencedColumnName = "id", nullable = false)
     private Member member;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
     @JoinColumn(name = "category_id_fk", referencedColumnName = "id", nullable = false)
     private Category category;
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)

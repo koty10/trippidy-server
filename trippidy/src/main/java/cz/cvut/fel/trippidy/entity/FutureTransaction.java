@@ -1,6 +1,7 @@
 package cz.cvut.fel.trippidy.entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "future_transaction")
@@ -14,10 +15,6 @@ public class FutureTransaction {
     private Member payer;
 
     @ManyToOne
-    @JoinColumn(name = "payee_id_fk", referencedColumnName = "id", nullable = false)
-    private Member payee;
-
-    @ManyToOne
     @JoinColumn(name = "item_id", referencedColumnName = "id", nullable = false)
     private Item item;
 
@@ -27,14 +24,6 @@ public class FutureTransaction {
 
     public void setItem(Item item) {
         this.item = item;
-    }
-
-    public Member getPayee() {
-        return payee;
-    }
-
-    public void setPayee(Member payee) {
-        this.payee = payee;
     }
 
     public Member getPayer() {
@@ -53,4 +42,16 @@ public class FutureTransaction {
         this.id = id;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FutureTransaction that = (FutureTransaction) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

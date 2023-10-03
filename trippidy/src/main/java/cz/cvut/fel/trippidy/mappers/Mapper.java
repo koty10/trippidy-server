@@ -102,15 +102,7 @@ public interface Mapper {
 
     Collection<Category> toEntity4(Collection<CategoryDto> categoryDto);
 
-
-    @Mapping(source = "itemPrice", target = "item.price")
-    @Mapping(source = "itemIsShared", target = "item.shared")
-    @Mapping(source = "itemIsPrivate", target = "item.private")
-    @Mapping(source = "itemAmount", target = "item.amount")
-    @Mapping(source = "itemIsChecked", target = "item.checked")
-    @Mapping(source = "itemName", target = "item.name")
     @Mapping(source = "itemId", target = "item.id")
-    @Mapping(source = "payeeId", target = "payee.id")
     @Mapping(source = "payerId", target = "payer.id")
     FutureTransaction toEntity(FutureTransactionDto futureTransactionDto);
 

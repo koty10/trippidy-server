@@ -24,19 +24,33 @@ public class ItemService {
         var item = entityManager.find(Item.class, itemDto.getId());
         if (!item.getMember().getUserProfile().getId().equals(userId)) throw new AuthException("User not authorized to edit this item.");
 
-        item.setAmount(itemDto.getAmount());
-        item.setCategory(item.getCategory());
-        item.setPrice(itemDto.getPrice());
-        item.setName(itemDto.getName());
-        item.setChecked(itemDto.isChecked());
-        item.setPrivate(item.isPrivate());
-        item.setShared(item.isShared());
+        var updatedItem = Mapper.MAPPER.toEntity(itemDto);
 
-        var category = item.getCategory();
-        category.setName(itemDto.getCategoryName());
+//        item.setAmount(itemDto.getAmount());
+//        item.setCategory(itemDto.getca);
+//        item.setPrice(itemDto.getPrice());
+//        item.setName(itemDto.getName());
+//        item.setChecked(itemDto.isChecked());
+//        item.setPrivate(itemDto.isPrivate());
+//        item.setShared(itemDto.isShared());
+//        item.setFutureTransactions(itemDto.getFutureTransactions());
 
-        entityManager.persist(item);
-        entityManager.persist(category);
+//        var category = item.getCategory();
+//        category.setName(itemDto.getCategoryName());
+
+        // Handle deletions
+        for (FutureTransaction oldItem : item.getFutureTransactions()) {
+            if (!updatedItem.getFutureTransactions().contains(oldItem)) {
+                FutureTransaction itemToDelete = entityManager.merge(oldItem); // reattach
+                entityManager.remove(itemToDelete); // and remove
+            }
+        }
+
+        entityManager.merge(updatedItem);
+//        entityManager.persist(item);
+//        entityManager.persist(category);
+
+
         return Mapper.MAPPER.toDto(item);
     }
 
