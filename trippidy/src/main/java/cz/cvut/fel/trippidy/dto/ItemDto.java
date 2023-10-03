@@ -6,6 +6,7 @@ import javax.json.bind.annotation.JsonbNillable;
 import javax.json.bind.annotation.JsonbProperty;
 import javax.ws.rs.DefaultValue;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Objects;
 
 /**
@@ -22,8 +23,10 @@ public class ItemDto implements Serializable {
     private String memberId;
     private String categoryId;
     private String categoryName;
+    private Collection<FutureTransactionDto> futureTransactions;
 
-    public ItemDto(String id, String name, boolean isChecked, int amount, boolean isPrivate, boolean isShared, int price, String memberId, String categoryId, String categoryName) {
+    public ItemDto(String id, String name, boolean isChecked, int amount, boolean isPrivate, boolean isShared, int price, String memberId, String categoryId, String categoryName,
+                   Collection<FutureTransactionDto> futureTransactions) {
         this.id = id;
         this.name = name;
         this.isChecked = isChecked;
@@ -34,6 +37,7 @@ public class ItemDto implements Serializable {
         this.memberId = memberId;
         this.categoryId = categoryId;
         this.categoryName = categoryName;
+        this.futureTransactions = futureTransactions;
     }
 
     public ItemDto() {
@@ -140,6 +144,7 @@ public class ItemDto implements Serializable {
                 Objects.equals(this.price, entity.price) &&
                 Objects.equals(this.memberId, entity.memberId) &&
                 Objects.equals(this.categoryId, entity.categoryId) &&
+                Objects.equals(this.futureTransactions, entity.futureTransactions) &&
                 Objects.equals(this.categoryName, entity.categoryName);
     }
 
@@ -160,6 +165,15 @@ public class ItemDto implements Serializable {
                 "price = " + price + ", " +
                 "memberId = " + memberId + ", " +
                 "categoryId = " + categoryId + ", " +
+                "futureTransactions = " + futureTransactions + ", " +
                 "categoryName = " + categoryName + ")";
+    }
+
+    public Collection<FutureTransactionDto> getFutureTransactions() {
+        return futureTransactions;
+    }
+
+    public void setFutureTransactions(Collection<FutureTransactionDto> futureTransactions) {
+        this.futureTransactions = futureTransactions;
     }
 }

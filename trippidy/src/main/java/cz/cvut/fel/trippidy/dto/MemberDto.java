@@ -19,8 +19,10 @@ public class MemberDto implements Serializable {
     private String userProfileFirstname;
     private String userProfileLastname;
     private String userProfileImage;
+    private Collection<FutureTransactionDto> futureTransactions;
 
-    public MemberDto(String id, String role, boolean accepted, Collection<ItemDto> items, String tripId, String userProfileId, String userProfileFirstname, String userProfileLastname, String userProfileImage) {
+    public MemberDto(String id, String role, boolean accepted, Collection<ItemDto> items, String tripId, String userProfileId, String userProfileFirstname, String userProfileLastname, String userProfileImage,
+                     Collection<FutureTransactionDto> futureTransactions) {
         this.id = id;
         this.role = role;
         this.accepted = accepted;
@@ -30,6 +32,7 @@ public class MemberDto implements Serializable {
         this.userProfileFirstname = userProfileFirstname;
         this.userProfileLastname = userProfileLastname;
         this.userProfileImage = userProfileImage;
+        this.futureTransactions = futureTransactions;
     }
 
     public MemberDto() {
@@ -120,6 +123,7 @@ public class MemberDto implements Serializable {
                 Objects.equals(this.role, entity.role) &&
                 Objects.equals(this.accepted, entity.accepted) &&
                 Objects.equals(this.items, entity.items) &&
+                Objects.equals(this.futureTransactions, entity.futureTransactions) &&
                 Objects.equals(this.tripId, entity.tripId) &&
                 Objects.equals(this.userProfileId, entity.userProfileId) &&
                 Objects.equals(this.userProfileFirstname, entity.userProfileFirstname) &&
@@ -139,10 +143,19 @@ public class MemberDto implements Serializable {
                 "role = " + role + ", " +
                 "accepted = " + accepted + ", " +
                 "items = " + items + ", " +
+                "futureTransactions = " + futureTransactions + ", " +
                 "tripId = " + tripId + ", " +
                 "userProfileId = " + userProfileId + ", " +
                 "userProfileFirstname = " + userProfileFirstname + ", " +
                 "userProfileImage = " + userProfileImage + ", " +
                 "userProfileLastname = " + userProfileLastname + ")";
+    }
+
+    public Collection<FutureTransactionDto> getFutureTransactions() {
+        return futureTransactions;
+    }
+
+    public void setFutureTransactions(Collection<FutureTransactionDto> futureTransactions) {
+        this.futureTransactions = futureTransactions;
     }
 }

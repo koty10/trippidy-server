@@ -116,5 +116,6 @@
                                  constraintName="FK_MEMBER_ON_USER_ID_FK" referencedColumnNames="id"
                                  referencedTableName="UserProfile"/>
     </changeSet>
+    <includeAll path="changelog/changes"/>
 
 </databaseChangeLog>

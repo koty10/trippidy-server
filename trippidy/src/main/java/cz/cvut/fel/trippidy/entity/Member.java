@@ -24,6 +24,8 @@ public class Member {
     @ManyToOne
     @JoinColumn(name = "user_id_fk", referencedColumnName = "id", nullable = false)
     private UserProfile userProfile;
+    @OneToMany(mappedBy = "payer", cascade = CascadeType.ALL)
+    private Collection<FutureTransaction> futureTransactions;
 
     public String getId() {
         return id;
@@ -84,5 +86,13 @@ public class Member {
 
     public void setUserProfile(UserProfile userProfile) {
         this.userProfile = userProfile;
+    }
+
+    public Collection<FutureTransaction> getFutureTransactions() {
+        return futureTransactions;
+    }
+
+    public void setFutureTransactions(Collection<FutureTransaction> futureTransactions) {
+        this.futureTransactions = futureTransactions;
     }
 }

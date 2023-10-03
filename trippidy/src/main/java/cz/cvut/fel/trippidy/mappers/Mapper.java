@@ -7,12 +7,12 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.Collection;
 
-@org.mapstruct.Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@org.mapstruct.Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = {Mapper.class, Mapper.class})
 public interface Mapper {
     Mapper MAPPER = Mappers.getMapper(Mapper.class);
 
     Trip toEntity(TripDto tripDto);
-    
+
     TripDto toDto(Trip trip);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
@@ -68,6 +68,7 @@ public interface Mapper {
             @Mapping(source = "trip.id", target = "tripId")
     })
     MemberDto toDto(Member member);
+
     @Mappings({
             @Mapping(source = "userProfileId", target = "userProfile.id"),
             @Mapping(source = "userProfileFirstname", target = "userProfile.firstname"),
@@ -100,4 +101,23 @@ public interface Mapper {
     Collection<CategoryDto> toDto4(Collection<Category> category);
 
     Collection<Category> toEntity4(Collection<CategoryDto> categoryDto);
+
+
+    @Mapping(source = "itemPrice", target = "item.price")
+    @Mapping(source = "itemIsShared", target = "item.shared")
+    @Mapping(source = "itemIsPrivate", target = "item.private")
+    @Mapping(source = "itemAmount", target = "item.amount")
+    @Mapping(source = "itemIsChecked", target = "item.checked")
+    @Mapping(source = "itemName", target = "item.name")
+    @Mapping(source = "itemId", target = "item.id")
+    @Mapping(source = "payeeId", target = "payee.id")
+    @Mapping(source = "payerId", target = "payer.id")
+    FutureTransaction toEntity(FutureTransactionDto futureTransactionDto);
+
+    @InheritInverseConfiguration(name = "toEntity")
+    FutureTransactionDto toDto(FutureTransaction futureTransaction);
+
+    @InheritConfiguration(name = "toEntity")
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    FutureTransaction partialUpdate(FutureTransactionDto futureTransactionDto, @MappingTarget FutureTransaction futureTransaction);
 }

@@ -2,6 +2,7 @@ package cz.cvut.fel.trippidy.entity;
 
 import javax.persistence.*;
 
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -33,8 +34,10 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "category_id_fk", referencedColumnName = "id", nullable = false)
     private Category category;
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    private Collection<FutureTransaction> futureTransactions;
 
-    public Item(String id, String name, boolean isChecked, int amount, boolean isPrivate, boolean isShared, int price, Member member, Category category) {
+    public Item(String id, String name, boolean isChecked, int amount, boolean isPrivate, boolean isShared, int price, Member member, Category category, Collection<FutureTransaction> futureTransactions) {
         this.id = id;
         this.name = name;
         this.isChecked = isChecked;
@@ -44,6 +47,7 @@ public class Item {
         this.price = price;
         this.member = member;
         this.category = category;
+        this.futureTransactions = futureTransactions;
     }
 
     public Item() {
@@ -132,5 +136,13 @@ public class Item {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Collection<FutureTransaction> getFutureTransactions() {
+        return futureTransactions;
+    }
+
+    public void setFutureTransactions(Collection<FutureTransaction> futureTransactions) {
+        this.futureTransactions = futureTransactions;
     }
 }
