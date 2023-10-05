@@ -1,5 +1,6 @@
 package cz.cvut.fel.trippidy.dto;
 
+import cz.cvut.fel.trippidy.entity.CompletedTransaction;
 import cz.cvut.fel.trippidy.entity.Member;
 
 import java.io.Serializable;
@@ -20,9 +21,13 @@ public class MemberDto implements Serializable {
     private String userProfileLastname;
     private String userProfileImage;
     private Collection<FutureTransactionDto> futureTransactions;
+    private Collection<CompletedTransaction> completedTransactionsSent;
+    private Collection<CompletedTransaction> completedTransactionsReceived;
 
     public MemberDto(String id, String role, boolean accepted, Collection<ItemDto> items, String tripId, String userProfileId, String userProfileFirstname, String userProfileLastname, String userProfileImage,
-                     Collection<FutureTransactionDto> futureTransactions) {
+                     Collection<FutureTransactionDto> futureTransactions,
+                     Collection<CompletedTransaction> completedTransactionsSent,
+                     Collection<CompletedTransaction> completedTransactionsReceived) {
         this.id = id;
         this.role = role;
         this.accepted = accepted;
@@ -33,6 +38,8 @@ public class MemberDto implements Serializable {
         this.userProfileLastname = userProfileLastname;
         this.userProfileImage = userProfileImage;
         this.futureTransactions = futureTransactions;
+        this.completedTransactionsSent = completedTransactionsSent;
+        this.completedTransactionsReceived = completedTransactionsReceived;
     }
 
     public MemberDto() {
@@ -157,5 +164,21 @@ public class MemberDto implements Serializable {
 
     public void setFutureTransactions(Collection<FutureTransactionDto> futureTransactions) {
         this.futureTransactions = futureTransactions;
+    }
+
+    public Collection<CompletedTransaction> getCompletedTransactionsSent() {
+        return completedTransactionsSent;
+    }
+
+    public void setCompletedTransactionsSent(Collection<CompletedTransaction> completedTransactionsSent) {
+        this.completedTransactionsSent = completedTransactionsSent;
+    }
+
+    public Collection<CompletedTransaction> getCompletedTransactionsReceived() {
+        return completedTransactionsReceived;
+    }
+
+    public void setCompletedTransactionsReceived(Collection<CompletedTransaction> completedTransactionsReceived) {
+        this.completedTransactionsReceived = completedTransactionsReceived;
     }
 }

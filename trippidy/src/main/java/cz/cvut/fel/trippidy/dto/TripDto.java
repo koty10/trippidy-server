@@ -23,6 +23,7 @@ public class TripDto implements Serializable {
     //@JsonbDateFormat(value = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateTo;
     private boolean isDeleted;
+    private Collection<CompletedTransactionDto> completedTransactions;
 
     public TripDto(String id, String name, Collection<MemberDto> members, LocalDateTime dateFrom, LocalDateTime dateTo) {
         this.id = id;
@@ -110,5 +111,13 @@ public class TripDto implements Serializable {
                 "members = " + members + ", " +
                 "dateFrom = " + dateFrom + ", " +
                 "dateTo = " + dateTo + ")";
+    }
+
+    public Collection<CompletedTransactionDto> getCompletedTransactions() {
+        return completedTransactions;
+    }
+
+    public void setCompletedTransactions(Collection<CompletedTransactionDto> completedTransactions) {
+        this.completedTransactions = completedTransactions;
     }
 }

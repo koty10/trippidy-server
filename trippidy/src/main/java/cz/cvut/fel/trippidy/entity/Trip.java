@@ -33,6 +33,9 @@ public class Trip {
     @Column(name = "isDeleted", nullable = false)
     private boolean isDeleted;
 
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
+    private Collection<CompletedTransaction> completedTransactions;
+
     public Trip() {
         members = new ArrayList<>();
     }
@@ -100,5 +103,13 @@ public class Trip {
 
     public void setMembers(Collection<Member> members) {
         this.members = members;
+    }
+
+    public Collection<CompletedTransaction> getCompletedTransactions() {
+        return completedTransactions;
+    }
+
+    public void setCompletedTransactions(Collection<CompletedTransaction> completedTransactions) {
+        this.completedTransactions = completedTransactions;
     }
 }

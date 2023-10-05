@@ -112,4 +112,24 @@ public interface Mapper {
     @InheritConfiguration(name = "toEntity")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     FutureTransaction partialUpdate(FutureTransactionDto futureTransactionDto, @MappingTarget FutureTransaction futureTransaction);
+
+    @Mapping(source = "tripId", target = "trip.id")
+    @Mapping(source = "payeeUserProfileImage", target = "payee.userProfile.image")
+    @Mapping(source = "payeeUserProfileLastname", target = "payee.userProfile.lastname")
+    @Mapping(source = "payeeUserProfileFirstname", target = "payee.userProfile.firstname")
+    @Mapping(source = "payeeUserProfileId", target = "payee.userProfile.id")
+    @Mapping(source = "payeeId", target = "payee.id")
+    @Mapping(source = "payerUserProfileImage", target = "payer.userProfile.image")
+    @Mapping(source = "payerUserProfileLastname", target = "payer.userProfile.lastname")
+    @Mapping(source = "payerUserProfileFirstname", target = "payer.userProfile.firstname")
+    @Mapping(source = "payerUserProfileId", target = "payer.userProfile.id")
+    @Mapping(source = "payerId", target = "payer.id")
+    CompletedTransaction toEntity(CompletedTransactionDto completedTransactionDto);
+
+    @InheritInverseConfiguration(name = "toEntity")
+    CompletedTransactionDto toDto(CompletedTransaction completedTransaction);
+
+    @InheritConfiguration(name = "toEntity")
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    CompletedTransaction partialUpdate(CompletedTransactionDto completedTransactionDto, @MappingTarget CompletedTransaction completedTransaction);
 }

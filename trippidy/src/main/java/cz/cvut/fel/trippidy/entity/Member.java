@@ -27,6 +27,12 @@ public class Member {
     @OneToMany(mappedBy = "payer", cascade = CascadeType.ALL)
     private Collection<FutureTransaction> futureTransactions;
 
+    @OneToMany(mappedBy = "payer", cascade = CascadeType.ALL)
+    private Collection<CompletedTransaction> completedTransactionsSent;
+
+    @OneToMany(mappedBy = "payee", cascade = CascadeType.ALL)
+    private Collection<CompletedTransaction> completedTransactionsReceived;
+
     public String getId() {
         return id;
     }
@@ -94,5 +100,21 @@ public class Member {
 
     public void setFutureTransactions(Collection<FutureTransaction> futureTransactions) {
         this.futureTransactions = futureTransactions;
+    }
+
+    public Collection<CompletedTransaction> getCompletedTransactionsReceived() {
+        return completedTransactionsReceived;
+    }
+
+    public void setCompletedTransactionsReceived(Collection<CompletedTransaction> completedTransactionsReceived) {
+        this.completedTransactionsReceived = completedTransactionsReceived;
+    }
+
+    public Collection<CompletedTransaction> getCompletedTransactionsSent() {
+        return completedTransactionsSent;
+    }
+
+    public void setCompletedTransactionsSent(Collection<CompletedTransaction> completedTransactionsSent) {
+        this.completedTransactionsSent = completedTransactionsSent;
     }
 }
