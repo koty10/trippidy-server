@@ -1,6 +1,7 @@
 package cz.cvut.fel.trippidy.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -22,7 +23,9 @@ public class CompletedTransaction {
     @JoinColumn(name = "trip_id_fk", referencedColumnName = "id", nullable = false)
     private Trip trip;
 
-    private int amount;
+    @Basic
+    @Column(name = "price", nullable = false)
+    private BigDecimal amount = BigDecimal.ZERO;
 
     private boolean canceled;
 
@@ -42,11 +45,11 @@ public class CompletedTransaction {
         this.id = id;
     }
 
-    public int getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

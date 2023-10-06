@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.13.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1696599891183-1" author="koten (generated)">
+        <addColumn tableName="Item">
+            <column name="price" type="DECIMAL" defaultValue="0"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="1696599891183-2" author="koten (generated)">
+        <addNotNullConstraint columnName="price" tableName="Item"/>
+    </changeSet>
+    <changeSet id="1696599891183-3" author="koten (generated)">
+        <addColumn tableName="completed_transaction">
+            <column name="price" type="DECIMAL" defaultValue="0"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="1696599891183-4" author="koten (generated)">
+        <addNotNullConstraint columnName="price" tableName="completed_transaction"/>
+    </changeSet>
+    <changeSet id="1696599891183-5" author="koten (generated)">
+        <dropColumn columnName="amount" tableName="completed_transaction"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,11 +1,16 @@
 package cz.cvut.fel.trippidy.dto;
 
 import cz.cvut.fel.trippidy.entity.Item;
+import cz.cvut.fel.trippidy.serializers.BigDecimalDeserializer;
+import cz.cvut.fel.trippidy.serializers.BigDecimalSerializer;
 
 import javax.json.bind.annotation.JsonbNillable;
 import javax.json.bind.annotation.JsonbProperty;
+import javax.json.bind.annotation.JsonbTypeDeserializer;
+import javax.json.bind.annotation.JsonbTypeSerializer;
 import javax.ws.rs.DefaultValue;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -19,13 +24,13 @@ public class ItemDto implements Serializable {
     private int amount;
     private boolean isPrivate;
     private boolean isShared;
-    private int price;
+    private BigDecimal price;
     private String memberId;
     private String categoryId;
     private String categoryName;
     private Collection<FutureTransactionDto> futureTransactions;
 
-    public ItemDto(String id, String name, boolean isChecked, int amount, boolean isPrivate, boolean isShared, int price, String memberId, String categoryId, String categoryName,
+    public ItemDto(String id, String name, boolean isChecked, int amount, boolean isPrivate, boolean isShared, BigDecimal price, String memberId, String categoryId, String categoryName,
                    Collection<FutureTransactionDto> futureTransactions) {
         this.id = id;
         this.name = name;
@@ -55,8 +60,9 @@ public class ItemDto implements Serializable {
         return amount;
     }
 
-
-    public int getPrice() {
+    @JsonbTypeDeserializer(BigDecimalDeserializer.class)
+    @JsonbTypeSerializer(BigDecimalSerializer.class)
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -84,7 +90,9 @@ public class ItemDto implements Serializable {
         this.amount = amount;
     }
 
-    public void setPrice(int price) {
+    @JsonbTypeDeserializer(BigDecimalDeserializer.class)
+    @JsonbTypeSerializer(BigDecimalSerializer.class)
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

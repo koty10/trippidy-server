@@ -1,8 +1,15 @@
 package cz.cvut.fel.trippidy.dto;
 
 import cz.cvut.fel.trippidy.entity.CompletedTransaction;
+import cz.cvut.fel.trippidy.serializers.BigDecimalDeserializer;
+import cz.cvut.fel.trippidy.serializers.BigDecimalSerializer;
 
+import javax.faces.convert.BigDecimalConverter;
+import javax.json.bind.annotation.JsonbProperty;
+import javax.json.bind.annotation.JsonbTypeDeserializer;
+import javax.json.bind.annotation.JsonbTypeSerializer;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -20,14 +27,14 @@ public class CompletedTransactionDto implements Serializable {
     private String payeeUserProfileFirstname;
     private String payeeUserProfileLastname;
     private String payeeUserProfileImage;
-    private int amount;
+    private BigDecimal amount;
     private boolean canceled;
     private String tripId;
 
     public CompletedTransactionDto() {
     }
 
-    public CompletedTransactionDto(String id, String payerId, String payerUserProfileId, String payerUserProfileFirstname, String payerUserProfileLastname, String payerUserProfileImage, String payeeId, String payeeUserProfileId, String payeeUserProfileFirstname, String payeeUserProfileLastname, String payeeUserProfileImage, int amount, boolean canceled,
+    public CompletedTransactionDto(String id, String payerId, String payerUserProfileId, String payerUserProfileFirstname, String payerUserProfileLastname, String payerUserProfileImage, String payeeId, String payeeUserProfileId, String payeeUserProfileFirstname, String payeeUserProfileLastname, String payeeUserProfileImage, BigDecimal amount, boolean canceled,
                                    String tripId) {
         this.id = id;
         this.payerId = payerId;
@@ -133,18 +140,24 @@ public class CompletedTransactionDto implements Serializable {
         this.payeeUserProfileImage = payeeUserProfileImage;
     }
 
-    public int getAmount() {
+    @JsonbTypeDeserializer(BigDecimalDeserializer.class)
+    @JsonbTypeSerializer(BigDecimalSerializer.class)
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    @JsonbTypeDeserializer(BigDecimalDeserializer.class)
+    @JsonbTypeSerializer(BigDecimalSerializer.class)
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
-    public boolean getCanceled() {
+    @JsonbProperty("isCanceled")
+    public boolean isCanceled() {
         return canceled;
     }
 
+    @JsonbProperty("isCanceled")
     public void setCanceled(boolean canceled) {
         this.canceled = canceled;
     }

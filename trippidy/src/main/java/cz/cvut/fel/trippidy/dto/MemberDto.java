@@ -21,13 +21,13 @@ public class MemberDto implements Serializable {
     private String userProfileLastname;
     private String userProfileImage;
     private Collection<FutureTransactionDto> futureTransactions;
-    private Collection<CompletedTransaction> completedTransactionsSent;
-    private Collection<CompletedTransaction> completedTransactionsReceived;
+    private Collection<CompletedTransactionDto> completedTransactionsSent;
+    private Collection<CompletedTransactionDto> completedTransactionsReceived;
 
     public MemberDto(String id, String role, boolean accepted, Collection<ItemDto> items, String tripId, String userProfileId, String userProfileFirstname, String userProfileLastname, String userProfileImage,
                      Collection<FutureTransactionDto> futureTransactions,
-                     Collection<CompletedTransaction> completedTransactionsSent,
-                     Collection<CompletedTransaction> completedTransactionsReceived) {
+                     Collection<CompletedTransactionDto> completedTransactionsSent,
+                     Collection<CompletedTransactionDto> completedTransactionsReceived) {
         this.id = id;
         this.role = role;
         this.accepted = accepted;
@@ -166,19 +166,19 @@ public class MemberDto implements Serializable {
         this.futureTransactions = futureTransactions;
     }
 
-    public Collection<CompletedTransaction> getCompletedTransactionsSent() {
+    public Collection<CompletedTransactionDto> getCompletedTransactionsSent() {
         return completedTransactionsSent;
     }
 
-    public void setCompletedTransactionsSent(Collection<CompletedTransaction> completedTransactionsSent) {
+    public void setCompletedTransactionsSent(Collection<CompletedTransactionDto> completedTransactionsSent) {
         this.completedTransactionsSent = completedTransactionsSent;
     }
 
-    public Collection<CompletedTransaction> getCompletedTransactionsReceived() {
+    public Collection<CompletedTransactionDto> getCompletedTransactionsReceived() {
         return completedTransactionsReceived;
     }
 
-    public void setCompletedTransactionsReceived(Collection<CompletedTransaction> completedTransactionsReceived) {
+    public void setCompletedTransactionsReceived(Collection<CompletedTransactionDto> completedTransactionsReceived) {
         this.completedTransactionsReceived = completedTransactionsReceived;
     }
 }

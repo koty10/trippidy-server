@@ -2,6 +2,7 @@ package cz.cvut.fel.trippidy.entity;
 
 import javax.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -27,7 +28,7 @@ public class Item {
     private boolean isShared;
     @Basic
     @Column(name = "price", nullable = false)
-    private int price;
+    private BigDecimal price = BigDecimal.ZERO;
     @ManyToOne
     @JoinColumn(name = "member_id_fk", referencedColumnName = "id", nullable = false)
     private Member member;
@@ -37,7 +38,7 @@ public class Item {
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private Collection<FutureTransaction> futureTransactions;
 
-    public Item(String id, String name, boolean isChecked, int amount, boolean isPrivate, boolean isShared, int price, Member member, Category category, Collection<FutureTransaction> futureTransactions) {
+    public Item(String id, String name, boolean isChecked, int amount, boolean isPrivate, boolean isShared, BigDecimal price, Member member, Category category, Collection<FutureTransaction> futureTransactions) {
         this.id = id;
         this.name = name;
         this.isChecked = isChecked;
@@ -77,11 +78,11 @@ public class Item {
         this.amount = amount;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
