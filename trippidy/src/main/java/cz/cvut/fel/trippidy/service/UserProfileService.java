@@ -37,6 +37,8 @@ public class UserProfileService {
             newUserProfile.setId(userId);
             newUserProfile.setFirstname("");
             newUserProfile.setLastname("");
+            newUserProfile.setBankAccountNumber("");
+            newUserProfile.setIban("");
             newUserProfile.setImage(request.getClaim("picture"));
             entityManager.persist(newUserProfile);
             return Mapper.MAPPER.toDto(newUserProfile);
@@ -59,6 +61,13 @@ public class UserProfileService {
         if (!userProfile.getId().equals(userId)) throw new AuthException("User not authorized to edit this userProfile.");
         userProfile.setFirstname(userProfileDto.getFirstname());
         userProfile.setLastname(userProfileDto.getLastname());
+        userProfile.setBankAccountNumber(userProfileDto.getBankAccountNumber());
+
+
+        //TODO calculate and save iban
+
+
+
         entityManager.persist(userProfile);
         return Mapper.MAPPER.toDto(userProfile);
     }

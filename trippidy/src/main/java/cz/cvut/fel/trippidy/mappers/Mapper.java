@@ -65,22 +65,17 @@ public interface Mapper {
             @Mapping(source = "userProfile.firstname", target = "userProfileFirstname"),
             @Mapping(source = "userProfile.lastname", target = "userProfileLastname"),
             @Mapping(source = "userProfile.image", target = "userProfileImage"),
+            @Mapping(source = "userProfile.bankAccountNumber", target = "userProfileBankAccountNumber"),
+            @Mapping(source = "userProfile.iban", target = "userProfileIban"),
             @Mapping(source = "trip.id", target = "tripId")
     })
     MemberDto toDto(Member member);
 
-    @Mappings({
-            @Mapping(source = "userProfileId", target = "userProfile.id"),
-            @Mapping(source = "userProfileFirstname", target = "userProfile.firstname"),
-            @Mapping(source = "userProfileLastname", target = "userProfile.lastname"),
-            @Mapping(source = "userProfileImage", target = "userProfile.image"),
-            @Mapping(source = "tripId", target = "trip.id")
-    })
+    @InheritInverseConfiguration(name = "toDto")
     Member toEntity(MemberDto memberDto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Member partialUpdate(MemberDto memberDto, @MappingTarget Member member);
-
 
     Collection<TripDto> toDto(Collection<Trip> trip);
 

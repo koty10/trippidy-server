@@ -29,6 +29,14 @@ public class UserProfile {
     @OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL)
     private Collection<Member> members;
 
+    @Basic
+    @Column(name = "bankAccountNumber", nullable = false, length = 128)
+    private String bankAccountNumber;
+
+    @Basic
+    @Column(name = "iban", nullable = false, length = 128)
+    private String iban;
+
     public String getImage() {
         return image;
     }
@@ -80,5 +88,21 @@ public class UserProfile {
 
     public void setMembers(Collection<Member> members) {
         this.members = members;
+    }
+
+    public String getBankAccountNumber() {
+        return bankAccountNumber;
+    }
+
+    public String getIban() {
+        return iban;
+    }
+
+    public void setBankAccountNumber(String bankAccountNumber) {
+        this.bankAccountNumber = bankAccountNumber;
+    }
+
+    public void setIban(String iban) {
+        this.iban = iban;
     }
 }

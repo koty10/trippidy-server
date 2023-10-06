@@ -15,13 +15,19 @@ public class UserProfileDto implements Serializable {
     private String lastname;
     private String image;
     private Collection<MemberDto> members;
+    private String bankAccountNumber;
+    private String iban;
 
-    public UserProfileDto(String id, String firstname, String lastname, String image, Collection<MemberDto> members) {
+    public UserProfileDto(String id, String firstname, String lastname, String image, Collection<MemberDto> members,
+                          String bankAccountNumber,
+                          String iban) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.image = image;
         this.members = members;
+        this.bankAccountNumber = bankAccountNumber;
+        this.iban = iban;
     }
 
     public UserProfileDto() {
@@ -92,5 +98,21 @@ public class UserProfileDto implements Serializable {
                 "lastname = " + lastname + ", " +
                 "image = " + image + ", " +
                 "members = " + members + ")";
+    }
+
+    public String getBankAccountNumber() {
+        return bankAccountNumber;
+    }
+
+    public void setBankAccountNumber(String bankAccountNumber) {
+        this.bankAccountNumber = bankAccountNumber;
+    }
+
+    public String getIban() {
+        return iban;
+    }
+
+    public void setIban(String iban) {
+        this.iban = iban;
     }
 }
