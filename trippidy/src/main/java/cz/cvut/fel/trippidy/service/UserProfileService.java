@@ -65,8 +65,8 @@ public class UserProfileService {
         userProfile.setLastname(userProfileDto.getLastname());
         userProfile.setBankAccountNumber(userProfileDto.getBankAccountNumber());
 
-        var bankAccountNumberArray = userProfileDto.getBankAccountNumber().split("/");
-        if (bankAccountNumberArray.length == 2) {
+        if (!userProfileDto.getBankAccountNumber().isEmpty()) {
+            var bankAccountNumberArray = userProfileDto.getBankAccountNumber().split("/");
             var bankAccountNumber = bankAccountNumberArray[0];
             var bankCode = bankAccountNumberArray[1];
 
@@ -79,6 +79,10 @@ public class UserProfileService {
                     .accountNumber(bankAccountNumber)
                     .build();
             userProfile.setIban(iban.toString());
+            userProfile.setBankAccountNumber(userProfileDto.getBankAccountNumber());
+        } else {
+            // user can remove his bank account number
+            userProfile.setBankAccountNumber(userProfileDto.getBankAccountNumber());
         }
 
         entityManager.persist(userProfile);
