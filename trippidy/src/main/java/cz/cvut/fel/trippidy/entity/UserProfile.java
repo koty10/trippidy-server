@@ -22,6 +22,11 @@ public class UserProfile {
     @Basic
     @Column(name = "lastname", nullable = false, length = 128)
     private String lastname;
+
+    @Basic
+    @Column(name = "email", nullable = false, length = 128)
+    private String email;
+
     @Basic
     @Column(name = "image", nullable = false, length = 1024)
     private String image;
@@ -74,7 +79,7 @@ public class UserProfile {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserProfile that = (UserProfile) o;
-        return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname);
+        return Objects.equals(id, that.id) && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname);
     }
 
     @Override
@@ -104,5 +109,13 @@ public class UserProfile {
 
     public void setIban(String iban) {
         this.iban = iban;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

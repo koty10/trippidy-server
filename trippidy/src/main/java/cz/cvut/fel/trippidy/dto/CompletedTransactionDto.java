@@ -22,11 +22,13 @@ public class CompletedTransactionDto implements Serializable {
     private String payerUserProfileFirstname;
     private String payerUserProfileLastname;
     private String payerUserProfileImage;
+    private String payerUserProfileEmail;
     private String payeeId;
     private String payeeUserProfileId;
     private String payeeUserProfileFirstname;
     private String payeeUserProfileLastname;
     private String payeeUserProfileImage;
+    private String payeeUserProfileEmail;
     private BigDecimal amount;
     private boolean canceled;
     private String tripId;
@@ -35,18 +37,20 @@ public class CompletedTransactionDto implements Serializable {
     }
 
     public CompletedTransactionDto(String id, String payerId, String payerUserProfileId, String payerUserProfileFirstname, String payerUserProfileLastname, String payerUserProfileImage, String payeeId, String payeeUserProfileId, String payeeUserProfileFirstname, String payeeUserProfileLastname, String payeeUserProfileImage, BigDecimal amount, boolean canceled,
-                                   String tripId) {
+                                   String tripId, String payerUserProfileEmail, String payeeUserProfileEmail) {
         this.id = id;
         this.payerId = payerId;
         this.payerUserProfileId = payerUserProfileId;
         this.payerUserProfileFirstname = payerUserProfileFirstname;
         this.payerUserProfileLastname = payerUserProfileLastname;
         this.payerUserProfileImage = payerUserProfileImage;
+        this.payerUserProfileEmail = payerUserProfileEmail;
         this.payeeId = payeeId;
         this.payeeUserProfileId = payeeUserProfileId;
         this.payeeUserProfileFirstname = payeeUserProfileFirstname;
         this.payeeUserProfileLastname = payeeUserProfileLastname;
         this.payeeUserProfileImage = payeeUserProfileImage;
+        this.payeeUserProfileEmail = payeeUserProfileEmail;
         this.amount = amount;
         this.canceled = canceled;
         this.tripId = tripId;
@@ -173,18 +177,20 @@ public class CompletedTransactionDto implements Serializable {
                 Objects.equals(this.payerUserProfileFirstname, entity.payerUserProfileFirstname) &&
                 Objects.equals(this.payerUserProfileLastname, entity.payerUserProfileLastname) &&
                 Objects.equals(this.payerUserProfileImage, entity.payerUserProfileImage) &&
+                Objects.equals(this.payerUserProfileEmail, entity.payerUserProfileEmail) &&
                 Objects.equals(this.payeeId, entity.payeeId) &&
                 Objects.equals(this.payeeUserProfileId, entity.payeeUserProfileId) &&
                 Objects.equals(this.payeeUserProfileFirstname, entity.payeeUserProfileFirstname) &&
                 Objects.equals(this.payeeUserProfileLastname, entity.payeeUserProfileLastname) &&
                 Objects.equals(this.payeeUserProfileImage, entity.payeeUserProfileImage) &&
+                Objects.equals(this.payeeUserProfileEmail, entity.payeeUserProfileEmail) &&
                 Objects.equals(this.amount, entity.amount) &&
                 Objects.equals(this.canceled, entity.canceled);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, payerId, payerUserProfileId, payerUserProfileFirstname, payerUserProfileLastname, payerUserProfileImage, payeeId, payeeUserProfileId, payeeUserProfileFirstname, payeeUserProfileLastname, payeeUserProfileImage, amount, canceled);
+        return Objects.hash(id, payerId, payerUserProfileId, payerUserProfileFirstname, payerUserProfileLastname, payerUserProfileImage, payerUserProfileEmail, payeeId, payeeUserProfileId, payeeUserProfileFirstname, payeeUserProfileLastname, payeeUserProfileImage, payeeUserProfileEmail, amount, canceled);
     }
 
     @Override
@@ -196,11 +202,13 @@ public class CompletedTransactionDto implements Serializable {
                 "payerUserProfileFirstname = " + payerUserProfileFirstname + ", " +
                 "payerUserProfileLastname = " + payerUserProfileLastname + ", " +
                 "payerUserProfileImage = " + payerUserProfileImage + ", " +
+                "payerUserProfileEmail = " + payerUserProfileEmail + ", " +
                 "payeeId = " + payeeId + ", " +
                 "payeeUserProfileId = " + payeeUserProfileId + ", " +
                 "payeeUserProfileFirstname = " + payeeUserProfileFirstname + ", " +
                 "payeeUserProfileLastname = " + payeeUserProfileLastname + ", " +
                 "payeeUserProfileImage = " + payeeUserProfileImage + ", " +
+                "payeeUserProfileEmail = " + payeeUserProfileEmail + ", " +
                 "amount = " + amount + ", " +
                 "canceled = " + canceled + ")";
     }
@@ -211,5 +219,21 @@ public class CompletedTransactionDto implements Serializable {
 
     public void setTripId(String tripId) {
         this.tripId = tripId;
+    }
+
+    public String getPayerUserProfileEmail() {
+        return payerUserProfileEmail;
+    }
+
+    public String getPayeeUserProfileEmail() {
+        return payeeUserProfileEmail;
+    }
+
+    public void setPayerUserProfileEmail(String payerUserProfileEmail) {
+        this.payerUserProfileEmail = payerUserProfileEmail;
+    }
+
+    public void setPayeeUserProfileEmail(String payeeUserProfileEmail) {
+        this.payeeUserProfileEmail = payeeUserProfileEmail;
     }
 }

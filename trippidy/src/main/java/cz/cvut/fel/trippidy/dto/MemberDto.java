@@ -25,11 +25,12 @@ public class MemberDto implements Serializable {
     private Collection<CompletedTransactionDto> completedTransactionsReceived;
     private String userProfileBankAccountNumber;
     private String userProfileIban;
+    private String userProfileEmail;
 
     public MemberDto(String id, String role, boolean accepted, Collection<ItemDto> items, String tripId, String userProfileId, String userProfileFirstname, String userProfileLastname, String userProfileImage,
                      Collection<FutureTransactionDto> futureTransactions,
                      Collection<CompletedTransactionDto> completedTransactionsSent,
-                     Collection<CompletedTransactionDto> completedTransactionsReceived, String userProfileBankAccountNumber, String userProfileIban) {
+                     Collection<CompletedTransactionDto> completedTransactionsReceived, String userProfileBankAccountNumber, String userProfileIban, String userProfileEmail) {
         this.id = id;
         this.role = role;
         this.accepted = accepted;
@@ -44,6 +45,7 @@ public class MemberDto implements Serializable {
         this.completedTransactionsReceived = completedTransactionsReceived;
         this.userProfileBankAccountNumber = userProfileBankAccountNumber;
         this.userProfileIban = userProfileIban;
+        this.userProfileEmail = userProfileEmail;
     }
 
     public MemberDto() {
@@ -141,12 +143,13 @@ public class MemberDto implements Serializable {
                 Objects.equals(this.userProfileImage, entity.userProfileImage) &&
                 Objects.equals(this.userProfileBankAccountNumber, entity.userProfileBankAccountNumber) &&
                 Objects.equals(this.userProfileIban, entity.userProfileIban) &&
+                Objects.equals(this.userProfileEmail, entity.userProfileEmail) &&
                 Objects.equals(this.userProfileLastname, entity.userProfileLastname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, role, accepted, items, tripId, userProfileId, userProfileFirstname, userProfileLastname, userProfileImage, userProfileBankAccountNumber, userProfileIban);
+        return Objects.hash(id, role, accepted, items, tripId, userProfileId, userProfileFirstname, userProfileLastname, userProfileEmail, userProfileImage, userProfileBankAccountNumber, userProfileIban);
     }
 
     @Override
@@ -160,7 +163,8 @@ public class MemberDto implements Serializable {
                 "tripId = " + tripId + ", " +
                 "userProfileId = " + userProfileId + ", " +
                 "userProfileFirstname = " + userProfileFirstname + ", " +
-                "userProfileFirstname = " + userProfileLastname + ", " +
+                "userProfileLastname = " + userProfileLastname + ", " +
+                "userProfileEmail = " + userProfileEmail + ", " +
                 "userProfileImage = " + userProfileImage + ", " +
                 "userProfileBankAccountNumber = " + userProfileBankAccountNumber + ", " +
                 "userProfileIban = " + userProfileIban + ")";
@@ -204,5 +208,13 @@ public class MemberDto implements Serializable {
 
     public void setUserProfileIban(String userProfileIban) {
         this.userProfileIban = userProfileIban;
+    }
+
+    public String getUserProfileEmail() {
+        return userProfileEmail;
+    }
+
+    public void setUserProfileEmail(String userProfileEmail) {
+        this.userProfileEmail = userProfileEmail;
     }
 }

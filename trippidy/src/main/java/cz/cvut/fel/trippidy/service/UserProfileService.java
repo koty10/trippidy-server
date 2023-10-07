@@ -42,6 +42,7 @@ public class UserProfileService {
             newUserProfile.setBankAccountNumber("");
             newUserProfile.setIban("");
             newUserProfile.setImage(request.getClaim("picture"));
+            newUserProfile.setEmail(request.getClaim("email"));
             entityManager.persist(newUserProfile);
             return Mapper.MAPPER.toDto(newUserProfile);
         }
@@ -49,13 +50,13 @@ public class UserProfileService {
 
     public Collection<UserProfileDto> findUserProfileByQuery(String userId, String query, String tripId) {
         var trip = entityManager.find(Trip.class, tripId);
-        return Mapper.MAPPER.toDto1(entityManager.createNamedQuery(UserProfile.FIND_BY_QUERY, UserProfile.class)
+        var userProfiles = entityManager.createNamedQuery(UserProfile.FIND_BY_QUERY, UserProfile.class)
                 .setParameter("query", "%" + query + "%")
                 .setParameter("userId", userId)
                 .getResultStream()
                 .filter(userProfile -> userProfile.getMembers().stream().noneMatch(trip.getMembers()::contains))
-                .collect(Collectors.toList())
-        );
+                .collect(Collectors.toList());
+        return userProfiles.stream().map(Mapper.MAPPER::toDto).collect(Collectors.toList());
     }
 
     public UserProfileDto updateUserProfile(String userId, UserProfileDto userProfileDto) throws AuthException {

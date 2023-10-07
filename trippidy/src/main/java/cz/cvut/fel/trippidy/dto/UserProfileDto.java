@@ -17,10 +17,12 @@ public class UserProfileDto implements Serializable {
     private Collection<MemberDto> members;
     private String bankAccountNumber;
     private String iban;
+    private String email;
 
     public UserProfileDto(String id, String firstname, String lastname, String image, Collection<MemberDto> members,
                           String bankAccountNumber,
-                          String iban) {
+                          String iban,
+                          String email) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -28,6 +30,7 @@ public class UserProfileDto implements Serializable {
         this.members = members;
         this.bankAccountNumber = bankAccountNumber;
         this.iban = iban;
+        this.email = email;
     }
 
     public UserProfileDto() {
@@ -81,13 +84,14 @@ public class UserProfileDto implements Serializable {
         return Objects.equals(this.id, entity.id) &&
                 Objects.equals(this.firstname, entity.firstname) &&
                 Objects.equals(this.lastname, entity.lastname) &&
+                Objects.equals(this.email, entity.email) &&
                 Objects.equals(this.image, entity.image) &&
                 Objects.equals(this.members, entity.members);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstname, lastname, image, members);
+        return Objects.hash(id, firstname, lastname, image, members, email);
     }
 
     @Override
@@ -96,6 +100,7 @@ public class UserProfileDto implements Serializable {
                 "id = " + id + ", " +
                 "firstname = " + firstname + ", " +
                 "lastname = " + lastname + ", " +
+                "email = " + email + ", " +
                 "image = " + image + ", " +
                 "members = " + members + ")";
     }
@@ -114,5 +119,13 @@ public class UserProfileDto implements Serializable {
 
     public void setIban(String iban) {
         this.iban = iban;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

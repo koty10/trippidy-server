@@ -67,6 +67,7 @@ public interface Mapper {
             @Mapping(source = "userProfile.image", target = "userProfileImage"),
             @Mapping(source = "userProfile.bankAccountNumber", target = "userProfileBankAccountNumber"),
             @Mapping(source = "userProfile.iban", target = "userProfileIban"),
+            @Mapping(source = "userProfile.email", target = "userProfileEmail"),
             @Mapping(source = "trip.id", target = "tripId")
     })
     MemberDto toDto(Member member);
@@ -77,25 +78,25 @@ public interface Mapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Member partialUpdate(MemberDto memberDto, @MappingTarget Member member);
 
-    Collection<TripDto> toDto(Collection<Trip> trip);
-
-    Collection<Trip> toEntity(Collection<TripDto> tripDto);
-
-    Collection<UserProfileDto> toDto1(Collection<UserProfile> userProfile);
-
-    Collection<UserProfile> toEntity1(Collection<UserProfileDto> userProfileDto);
-
-    Collection<MemberDto> toDto2(Collection<Member> member);
-
-    Collection<Member> toEntity2(Collection<MemberDto> memberDto);
-
-    Collection<ItemDto> toDto3(Collection<Item> item);
-
-    Collection<Item> toEntity3(Collection<ItemDto> itemDto);
-
-    Collection<CategoryDto> toDto4(Collection<Category> category);
-
-    Collection<Category> toEntity4(Collection<CategoryDto> categoryDto);
+//    Collection<TripDto> toDto(Collection<Trip> trip);
+//
+//    Collection<Trip> toEntity(Collection<TripDto> tripDto);
+//
+//    Collection<UserProfileDto> toDto1(Collection<UserProfile> userProfile);
+//
+//    Collection<UserProfile> toEntity1(Collection<UserProfileDto> userProfileDto);
+//
+//    Collection<MemberDto> toDto2(Collection<Member> member);
+//
+//    Collection<Member> toEntity2(Collection<MemberDto> memberDto);
+//
+//    Collection<ItemDto> toDto3(Collection<Item> item);
+//
+//    Collection<Item> toEntity3(Collection<ItemDto> itemDto);
+//
+//    Collection<CategoryDto> toDto4(Collection<Category> category);
+//
+//    Collection<Category> toEntity4(Collection<CategoryDto> categoryDto);
 
     @Mapping(source = "itemId", target = "item.id")
     @Mapping(source = "payerId", target = "payer.id")
@@ -113,11 +114,13 @@ public interface Mapper {
     @Mapping(source = "payeeUserProfileLastname", target = "payee.userProfile.lastname")
     @Mapping(source = "payeeUserProfileFirstname", target = "payee.userProfile.firstname")
     @Mapping(source = "payeeUserProfileId", target = "payee.userProfile.id")
+    @Mapping(source = "payeeUserProfileEmail", target = "payee.userProfile.email")
     @Mapping(source = "payeeId", target = "payee.id")
     @Mapping(source = "payerUserProfileImage", target = "payer.userProfile.image")
     @Mapping(source = "payerUserProfileLastname", target = "payer.userProfile.lastname")
     @Mapping(source = "payerUserProfileFirstname", target = "payer.userProfile.firstname")
     @Mapping(source = "payerUserProfileId", target = "payer.userProfile.id")
+    @Mapping(source = "payerUserProfileEmail", target = "payer.userProfile.email")
     @Mapping(source = "payerId", target = "payer.id")
     CompletedTransaction toEntity(CompletedTransactionDto completedTransactionDto);
 
