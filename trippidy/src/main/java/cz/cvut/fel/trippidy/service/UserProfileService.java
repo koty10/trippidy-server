@@ -1,12 +1,13 @@
 package cz.cvut.fel.trippidy.service;
 
-import cz.cvut.fel.trippidy.dto.MemberDto;
 import cz.cvut.fel.trippidy.dto.UserProfileDto;
-import cz.cvut.fel.trippidy.entity.Member;
 import cz.cvut.fel.trippidy.entity.Trip;
 import cz.cvut.fel.trippidy.entity.UserProfile;
 import cz.cvut.fel.trippidy.mappers.Mapper;
+import cz.cvut.fel.trippidy.utility.StringUtility;
 import org.eclipse.microprofile.jwt.JsonWebToken;
+import org.iban4j.CountryCode;
+import org.iban4j.Iban;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -16,6 +17,7 @@ import javax.persistence.PersistenceContext;
 import javax.security.auth.message.AuthException;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Stateless
@@ -63,10 +65,21 @@ public class UserProfileService {
         userProfile.setLastname(userProfileDto.getLastname());
         userProfile.setBankAccountNumber(userProfileDto.getBankAccountNumber());
 
+        var bankAccountNumberArray = userProfileDto.getBankAccountNumber().split("/");
+        if (bankAccountNumberArray.length == 2) {
+            var bankAccountNumber = bankAccountNumberArray[0];
+            var bankCode = bankAccountNumberArray[1];
 
-        //TODO calculate and save iban
+            // remove hyphens and add 0 from left to get 16 characters long bank account number
+            bankAccountNumber = StringUtility.normalizeString(bankAccountNumber);
 
-
+            Iban iban = new Iban.Builder()
+                    .countryCode(CountryCode.CZ)
+                    .bankCode(bankCode)
+                    .accountNumber(bankAccountNumber)
+                    .build();
+            userProfile.setIban(iban.toString());
+        }
 
         entityManager.persist(userProfile);
         return Mapper.MAPPER.toDto(userProfile);
