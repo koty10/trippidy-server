@@ -2,6 +2,7 @@ package cz.cvut.fel.trippidy.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.theokanning.openai.client.OpenAiApi;
 import com.theokanning.openai.completion.chat.ChatCompletionRequest;
 import com.theokanning.openai.completion.chat.ChatMessage;
 import com.theokanning.openai.completion.chat.ChatMessageRole;
@@ -9,11 +10,15 @@ import com.theokanning.openai.service.OpenAiService;
 import cz.cvut.fel.trippidy.config.ConfigReader;
 import cz.cvut.fel.trippidy.dto.SuggestionRequestDto;
 import cz.cvut.fel.trippidy.dto.SuggestionResponseDto;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 import javax.ejb.Stateless;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+
+import static com.theokanning.openai.service.OpenAiService.*;
 
 @Stateless
 public class SuggestionService {
@@ -31,14 +36,29 @@ public class SuggestionService {
         ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), message);
         messages.add(userMessage);
 
-        OpenAiService service = new OpenAiService(ConfigReader.getOpenaiApiKey());
+        ObjectMapper mapper = defaultObjectMapper();
+        OkHttpClient client = defaultClient(ConfigReader.getOpenaiApiKey(), java.time.Duration.ofSeconds(60))
+                .newBuilder()
+                //.interceptor(HttpLoggingInterceptor())
+                .build();
+        Retrofit retrofit = defaultRetrofit(client, mapper);
+
+        OpenAiApi api = retrofit.create(OpenAiApi.class);
+        OpenAiService service = new OpenAiService(api);
+
+        //OpenAiService service = new OpenAiService(ConfigReader.getOpenaiApiKey());
 
         ChatCompletionRequest chatCompletionRequest = ChatCompletionRequest.builder()
                 .model(ConfigReader.getOpenaiModel())
                 .messages(messages)
                 .build();
 
+        long start = System.nanoTime();
         var completion = service.createChatCompletion(chatCompletionRequest);
+        long end = System.nanoTime();
+        long elapsedTime = end - start;
+        log.info("gpt call took " + elapsedTime / 1000000 + "ms.");
+
         var response = new SuggestionResponseDto();
 
         try {
