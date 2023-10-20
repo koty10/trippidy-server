@@ -29,8 +29,8 @@ public class SuggestionService {
 
         var message = "I prepare myself for an event. You can find info in following json: " +
                 objectMapper.writeValueAsString(suggestionRequestDto) +
-                ". Suggest me 10 more items that I should pack. Your response must be a json array of strings in this format {\"suggestedItems\": []}. " +
-                "Answer should be in language: cs";
+                ". Suggest me 10 more items that I should pack. Your response must be a json array of strings in this format {\"suggestedItems\": []}. Dont write anything else! " +
+                "Answer should be in language: english";
 
         List<ChatMessage> messages = new ArrayList<>();
         ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), message);
