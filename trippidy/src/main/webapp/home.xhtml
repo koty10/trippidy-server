@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <title>Welcome to Trippidy</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .logo {
+            width: 50vw;
+            max-height: 50vh;
+            top: 5em;
+            margin-bottom: 5em;
+        }
+        .title {
+            font-size: 4em;
+            color: #333;
+            margin-bottom: 1em;
+        }
+        .description {
+            font-size: 2em;
+            color: #777;
+            text-align: center;
+            max-width: 50vw;
+        }
+    </style>
+</h:head>
+<h:body>
+    <div class="center-content">
+        <h:graphicImage library="images" name="trippidy_logo.png" styleClass="logo" alt="Trippidy Logo" />
+        <h:outputText value="Trippidy" styleClass="title" />
+        <h:outputText value="Welcome to Trippidy - your ultimate travel companion. Cooperate, plan, check and share your adventures." styleClass="description" />
+    </div>
+</h:body>
+</html>

@@ -1,14 +1,19 @@
 version: '3.3'
 
 services:
-  payara:
-    container_name: payara
+  trippidy-payara:
+    container_name: trippidy-payara
     build: .
-    ports:
-      - "9680:8080"
-      - "9681:8181" # web https
-      - "9648:4848" # admin
-      - "9690:9009" # debug
+    # ports:
+    #   - "9680:8080"
+    #   - "9681:8181" # web https
+    #   - "9648:4848" # admin
+    #   - "9690:9009" # debug
+    expose:
+      - "8080"
+      - "8181"
+      - "4848"
+      - "9009"
     volumes:
       - ./target/trippidy-1.0.0-SNAPSHOT.war:/opt/payara/appserver/glassfish/domains/domain1/autodeploy/trippidy-1.0.0-SNAPSHOT.war
     depends_on:
@@ -35,6 +40,28 @@ services:
     volumes:
       - ./src/main/resources/changelog/:/liquibase/changelog/
     command: --defaults-file=/liquibase/changelog/local.properties update
+
+  nginx:
+    image: nginx:alpine3.18
+    container_name: nginx
+    volumes:
+      - ./data/nginx:/etc/nginx/conf.d
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - trippidy-payara
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
 volumes:
   trippidy-db-volume:
