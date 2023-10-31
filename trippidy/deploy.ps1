@@ -1,4 +1,4 @@
 git pull
-docker-compose stop
+#docker-compose stop
 mvn clean package
-docker-compose up -d
+#docker-compose up -d
