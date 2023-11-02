@@ -60,21 +60,33 @@ public class TripService {
 //        return Mapper.MAPPER.toDto(trip);
     }
 
-    public TripDto findTripById(String id) {
-        return Mapper.MAPPER.toDto(entityManager.find(Trip.class, id));
-    }
-
     public TripDto deleteTrip(String userId, String id) throws AuthException {
-        UserProfile userProfile = entityManager.find(UserProfile.class, userId);
-        boolean isOwner = false;
-        for (var m : userProfile.getMembers()) {
-            if (m.getRole().equals(MemberRole.admin.name()) && m.getTrip().getId().equals(id)) isOwner = true;
-        }
-        if (!isOwner) throw new AuthException("User not authorized to edit this item.");
-
+        checkTripOwnership(userId, id);
         var trip = entityManager.find(Trip.class, id);
         trip.setDeleted(true);
         entityManager.persist(trip);
         return Mapper.MAPPER.toDto(trip);
+    }
+
+    public TripDto findTrip(String userId, String id) throws AuthException {
+        var trip = entityManager.find(Trip.class, id);
+        if (trip.getMembers().stream().map(x -> x.getUserProfile().getId()).anyMatch(x -> x.equals(userId))) {
+            return Mapper.MAPPER.toDto(entityManager.find(Trip.class, id));
+        } else {
+            throw new AuthException("User not authorized to read this item.");
+        }
+    }
+
+    // Throws AuthException if user is not an owner of the trip
+    private void checkTripOwnership(String userId, String tripId) throws AuthException {
+        UserProfile userProfile = entityManager.find(UserProfile.class, userId);
+        boolean isOwner = false;
+        for (var m : userProfile.getMembers()) {
+            if (m.getRole().equals(MemberRole.admin.name()) && m.getTrip().getId().equals(tripId)) {
+                isOwner = true;
+                break;
+            }
+        }
+        if (!isOwner) throw new AuthException("User not authorized to edit this item.");
     }
 }

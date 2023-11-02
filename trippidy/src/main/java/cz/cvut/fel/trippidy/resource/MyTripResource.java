@@ -31,10 +31,16 @@ public class MyTripResource {
         return tripService.findTrips(securityContext.getUserPrincipal().getName());
     }
 
+    @GET
+    @Path("{id}")
+    public TripDto trip(@PathParam("id") String id) throws AuthException {
+        return tripService.findTrip(securityContext.getUserPrincipal().getName(), id);
+    }
+
     @POST
-    public TripDto createTrip(TripDto tripDto) {
+    public TripDto createTrip(TripDto tripDto) throws AuthException {
         var trip = tripService.createTrip(securityContext.getUserPrincipal().getName(), tripDto);
-        return tripService.findTripById(trip.getId());
+        return tripService.findTrip(securityContext.getUserPrincipal().getName(), trip.getId());
     }
 
     @DELETE
