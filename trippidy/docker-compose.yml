@@ -11,19 +11,40 @@ services:
     networks:
       - trippidy_network
 
-  trippidy-payara:
-    container_name: trippidy-payara
+  trippidy-payara-direct:
+    #container_name: trippidy-payara
     build: .
-    # ports:
+    ports:
+       - "1234:8080"
+    #   - "9681:8181" # web https
+    #   - "9648:4848" # admin
+    #  - "9690:9009" # debug
+    #expose:
+      #- "8080"
+      #- "8181"
+      #- "4848"
+      #- "9009"
+    volumes:
+      - ./target/trippidy-1.0.0-SNAPSHOT.war:/opt/payara/appserver/glassfish/domains/domain1/autodeploy/trippidy-1.0.0-SNAPSHOT.war
+    depends_on:
+      - db
+      - liquibase
+    networks:
+      - trippidy_network
+
+  trippidy-payara:
+    #container_name: trippidy-payara
+    build: .
+    ports:
     #   - "9680:8080"
     #   - "9681:8181" # web https
     #   - "9648:4848" # admin
-    #   - "9690:9009" # debug
+      - "9690:9009" # debug
     expose:
       - "8080"
       - "8181"
       - "4848"
-      - "9009"
+    #  - "9009"
     volumes:
       - ./target/trippidy-1.0.0-SNAPSHOT.war:/opt/payara/appserver/glassfish/domains/domain1/autodeploy/trippidy-1.0.0-SNAPSHOT.war
     depends_on:
@@ -39,8 +60,8 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
       - POSTGRES_DB=db
-    volumes:
-      - trippidy-db-volume:/var/lib/postgresql/data
+    #volumes:
+    #  - trippidy-db-volume:/var/lib/postgresql/data
     ports:
       - "9654:5432"
     networks:

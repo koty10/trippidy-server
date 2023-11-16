@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 @Path("/v1/my/member")
@@ -33,7 +34,10 @@ public class MyMemberResource {
     }
 
     @POST
-    public MemberDto createMember(@Context HttpServletRequest request, MemberDto memberDto) throws Exception {
-        return memberService.createMember(securityContext.getUserPrincipal().getName(), memberDto);
+    public Response createMember(@Context HttpServletRequest request, MemberDto memberDto) throws Exception {
+        var member = memberService.createMember(securityContext.getUserPrincipal().getName(), memberDto);
+        return Response.ok(memberService.toDto(member))
+                //.header("location", "")
+                .build();
     }
 }

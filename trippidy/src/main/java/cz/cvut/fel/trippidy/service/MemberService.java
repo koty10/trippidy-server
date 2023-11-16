@@ -25,7 +25,7 @@ public class MemberService {
         return Mapper.MAPPER.toDto(member);
     }
 
-    public MemberDto createMember(String userId, MemberDto memberDto) throws Exception { //todo remove userId
+    public Member createMember(String userId, MemberDto memberDto) throws Exception { //todo remove userId
         if (entityManager.find(Member.class, memberDto.getId()) != null) throw new Exception("Element already exists");
 
         Member member = Mapper.MAPPER.toEntity(memberDto);
@@ -39,6 +39,11 @@ public class MemberService {
         entityManager.persist(userProfile);
         // FIXME I have to load full member object here but probably this is not the best approach
         member.setUserProfile(userProfile);
+        return member;
+        //return Mapper.MAPPER.toDto(member);
+    }
+
+    public MemberDto toDto(Member member) {
         return Mapper.MAPPER.toDto(member);
     }
 }
