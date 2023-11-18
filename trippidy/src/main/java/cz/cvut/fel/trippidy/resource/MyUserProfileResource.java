@@ -6,6 +6,7 @@ import cz.cvut.fel.trippidy.dto.UserProfileDto;
 import cz.cvut.fel.trippidy.mappers.Mapper;
 import cz.cvut.fel.trippidy.service.TripService;
 import cz.cvut.fel.trippidy.service.UserProfileService;
+import liquibase.datatype.core.UUIDType;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import jakarta.annotation.security.RolesAllowed;
@@ -19,6 +20,7 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.SecurityContext;
 import java.util.Collection;
+import java.util.UUID;
 
 @Path("/v1/my/userProfile")
 @RequestScoped
@@ -38,13 +40,14 @@ public class MyUserProfileResource {
     }
 
     @PUT
-    public UserProfileDto updateUserProfile(@Context HttpServletRequest request, UserProfileDto userProfileDto) throws AuthException {
-        return userProfileService.updateUserProfile(securityContext.getUserPrincipal().getName(), userProfileDto);
+    public UserProfileDto updateUserProfile(UserProfileDto userProfileDto) throws AuthException {
+        var userProfile = userProfileService.updateUserProfile(securityContext.getUserPrincipal().getName(), userProfileDto);
+        return userProfileService.toDto(userProfile);
     }
 
     @GET
     @Path("{query}")
     public Collection<UserProfileDto> userProfile(@PathParam("query") String query, @QueryParam("tripId") String tripId) {
-        return userProfileService.findUserProfileByQuery(securityContext.getUserPrincipal().getName(), query, tripId);
+        return userProfileService.findUserProfileByQuery(securityContext.getUserPrincipal().getName(), query, UUID.fromString(tripId));
     }
 }

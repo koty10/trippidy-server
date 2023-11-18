@@ -4,16 +4,17 @@ import cz.cvut.fel.trippidy.entity.FutureTransaction;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * DTO for {@link FutureTransaction}
  */
 public class FutureTransactionDto implements Serializable {
-    private String id;
-    private String payerId;
-    private String itemId;
+    private UUID id;
+    private UUID payerId;
+    private UUID itemId;
 
-    public FutureTransactionDto(String id, String payerId, String itemId) {
+    public FutureTransactionDto(UUID id, UUID payerId, UUID itemId) {
         this.id = id;
         this.payerId = payerId;
         this.itemId = itemId;
@@ -21,11 +22,11 @@ public class FutureTransactionDto implements Serializable {
 
     public FutureTransactionDto() {}
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public String getPayerId() {
+    public UUID getPayerId() {
         return payerId;
     }
 
@@ -52,19 +53,19 @@ public class FutureTransactionDto implements Serializable {
                 '}';
     }
 
-    public String getItemId() {
+    public UUID getItemId() {
         return itemId;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
-    public void setItemId(String itemId) {
+    public void setItemId(UUID itemId) {
         this.itemId = itemId;
     }
 
-    public void setPayerId(String payerId) {
+    public void setPayerId(UUID payerId) {
         this.payerId = payerId;
     }
 }

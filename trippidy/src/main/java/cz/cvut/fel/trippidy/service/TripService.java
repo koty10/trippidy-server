@@ -14,6 +14,8 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.security.auth.message.AuthException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 //@ApplicationScoped
@@ -24,24 +26,28 @@ public class TripService {
     EntityManager entityManager;
 
     public List<TripDto> findTrips(String userId) {
-        return entityManager.createNamedQuery(Trip.FIND_BY_USER_PROFILE_ID, Trip.class)
+        var res = entityManager.createNamedQuery(Trip.FIND_BY_USER_PROFILE_ID, Trip.class)
                 .setParameter("userId", userId)
                 .getResultStream()
                 .map(Mapper.MAPPER::toDto)
                 .collect(Collectors.toList());
+
+        // don't include private items of other members
+        for (var trip : res) {
+            for (var member : trip.getMembers()) {
+                if (!Objects.equals(member.getUserProfileId(), userId)) {
+                    member.setItems(member.getItems().stream().filter(item -> !item.isPrivate()).collect(Collectors.toList()));
+                }
+            }
+        }
+        return res;
     }
 
-    // TODO it does not include userProfileFirstname etc in the response - maybe i have to load it somehow
-    public TripDto createTrip(String userId, TripDto tripDto) {
-        //return null;
-        UserProfile userProfile = entityManager.createNamedQuery(UserProfile.FIND_BY_ID, UserProfile.class)
-                .setParameter("userId", userId)
-                .getSingleResult();
-
+    public Trip createTrip(TripDto tripDto) {
         var newTrip = Mapper.MAPPER.toEntity(tripDto);
         entityManager.persist(newTrip);
 
-        return Mapper.MAPPER.toDto(newTrip);
+        return newTrip;
 
 //        Member member = new Member();
 //        member.setAccepted(true);
@@ -60,25 +66,36 @@ public class TripService {
 //        return Mapper.MAPPER.toDto(trip);
     }
 
-    public TripDto deleteTrip(String userId, String id) throws AuthException {
-        checkTripOwnership(userId, id);
-        var trip = entityManager.find(Trip.class, id);
+    public Trip deleteTrip(String userId, UUID tripId) throws AuthException {
+        checkTripOwnership(userId, tripId);
+        var trip = entityManager.find(Trip.class, tripId);
         trip.setDeleted(true);
-        entityManager.persist(trip);
-        return Mapper.MAPPER.toDto(trip);
+        return trip;
     }
 
-    public TripDto findTrip(String userId, String id) throws AuthException {
-        var trip = entityManager.find(Trip.class, id);
+    public TripDto findTrip(String userId, UUID tripId) throws AuthException {
+        var trip = entityManager.find(Trip.class, tripId);
         if (trip.getMembers().stream().map(x -> x.getUserProfile().getId()).anyMatch(x -> x.equals(userId))) {
-            return Mapper.MAPPER.toDto(trip);
+            var res = Mapper.MAPPER.toDto(trip);
+
+            // don't include private items of other members
+            for (var member : res.getMembers()) {
+                if (!Objects.equals(member.getUserProfileId(), userId)) {
+                    member.setItems(member.getItems().stream().filter(item -> !item.isPrivate()).collect(Collectors.toList()));
+                }
+            }
+            return res;
         } else {
             throw new AuthException("User not authorized to read this item.");
         }
     }
 
+    public TripDto toDto(Trip trip) {
+        return Mapper.MAPPER.toDto(trip);
+    }
+
     // Throws AuthException if user is not an owner of the trip
-    private void checkTripOwnership(String userId, String tripId) throws AuthException {
+    private void checkTripOwnership(String userId, UUID tripId) throws AuthException {
         UserProfile userProfile = entityManager.find(UserProfile.class, userId);
         boolean isOwner = false;
         for (var m : userProfile.getMembers()) {

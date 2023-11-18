@@ -5,12 +5,14 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 public class Item {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
-    private String id;
+    private UUID id;
     @Basic
     @Column(name = "name", nullable = false, length = 128)
     private String name;
@@ -38,7 +40,7 @@ public class Item {
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private Collection<FutureTransaction> futureTransactions;
 
-    public Item(String id, String name, boolean isChecked, int amount, boolean isPrivate, boolean isShared, BigDecimal price, Member member, Category category, Collection<FutureTransaction> futureTransactions) {
+    public Item(UUID id, String name, boolean isChecked, int amount, boolean isPrivate, boolean isShared, BigDecimal price, Member member, Category category, Collection<FutureTransaction> futureTransactions) {
         this.id = id;
         this.name = name;
         this.isChecked = isChecked;
@@ -54,11 +56,11 @@ public class Item {
     public Item() {
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

@@ -34,12 +34,14 @@ public class MyItemResource {
     SecurityContext securityContext;
 
     @PUT
-    public ItemDto updateItem(@Context HttpServletRequest request, ItemDto itemDto) throws AuthException {
-        return itemService.updateItem(securityContext.getUserPrincipal().getName(), itemDto);
+    public ItemDto updateItem(ItemDto itemDto) throws AuthException {
+        var item =  itemService.updateItem(securityContext.getUserPrincipal().getName(), itemDto);
+        return itemService.toDto(item);
     }
 
     @POST
-    public ItemDto createItem(@Context HttpServletRequest request, ItemDto itemDto) throws Exception {
-        return itemService.createItem(securityContext.getUserPrincipal().getName(), itemDto);
+    public ItemDto createItem(ItemDto itemDto) {
+        var item = itemService.createItem(itemDto);
+        return itemService.toDto(item);
     }
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.Collection;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @NamedQueries({

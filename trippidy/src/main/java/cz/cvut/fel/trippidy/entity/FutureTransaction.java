@@ -2,13 +2,15 @@ package cz.cvut.fel.trippidy.entity;
 
 import jakarta.persistence.*;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "future_transaction")
 public class FutureTransaction {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
-    private String id;
+    private UUID id;
 
     @ManyToOne
     @JoinColumn(name = "payer_id_fk", referencedColumnName = "id", nullable = false)
@@ -34,11 +36,11 @@ public class FutureTransaction {
         this.payer = payer;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @NamedQueries({
@@ -15,8 +16,9 @@ import java.util.Objects;
 public class Trip {
     public static final String FIND_BY_USER_PROFILE_ID = "Trip.findByUserProfileId";
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
-    private String id;
+    private UUID id;
     @Basic
     @Column(name = "name", nullable = false, length = 128)
     private String name;
@@ -68,11 +70,11 @@ public class Trip {
         this.dateFrom = dateFrom;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

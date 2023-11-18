@@ -29,13 +29,14 @@ public class MyMemberResource {
     SecurityContext securityContext;
 
     @PUT
-    public MemberDto updateMember(@Context HttpServletRequest request, MemberDto memberDto) throws AuthException {
-        return memberService.updateMember(securityContext.getUserPrincipal().getName(), memberDto);
+    public MemberDto updateMember(MemberDto memberDto) throws AuthException {
+        var member = memberService.updateMember(securityContext.getUserPrincipal().getName(), memberDto);
+        return memberService.toDto(member);
     }
 
     @POST
-    public Response createMember(@Context HttpServletRequest request, MemberDto memberDto) throws Exception {
-        var member = memberService.createMember(securityContext.getUserPrincipal().getName(), memberDto);
+    public Response createMember(MemberDto memberDto) throws Exception {
+        var member = memberService.createMember(memberDto);
         return Response.ok(memberService.toDto(member))
                 //.header("location", "")
                 .build();

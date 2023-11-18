@@ -31,9 +31,9 @@ public class UserProfileService {
 
     public UserProfileDto findUserProfile(String userId) {
         try {
-            return Mapper.MAPPER.toDto(entityManager.createNamedQuery(UserProfile.FIND_BY_ID, UserProfile.class)
-                    .setParameter("userId", userId)
-                    .getSingleResult());
+            var userProfile = entityManager.find(UserProfile.class, userId);
+            if (userProfile == null) throw new NoResultException("User does not exist");
+            return Mapper.MAPPER.toDto(userProfile);
         } catch (NoResultException exception) {
             UserProfile newUserProfile = new UserProfile();
             newUserProfile.setId(userId);
@@ -48,7 +48,7 @@ public class UserProfileService {
         }
     }
 
-    public Collection<UserProfileDto> findUserProfileByQuery(String userId, String query, String tripId) {
+    public Collection<UserProfileDto> findUserProfileByQuery(String userId, String query, UUID tripId) {
         var trip = entityManager.find(Trip.class, tripId);
         var userProfiles = entityManager.createNamedQuery(UserProfile.FIND_BY_QUERY, UserProfile.class)
                 .setParameter("query", "%" + query + "%")
@@ -59,7 +59,7 @@ public class UserProfileService {
         return userProfiles.stream().map(Mapper.MAPPER::toDto).collect(Collectors.toList());
     }
 
-    public UserProfileDto updateUserProfile(String userId, UserProfileDto userProfileDto) throws AuthException {
+    public UserProfile updateUserProfile(String userId, UserProfileDto userProfileDto) throws AuthException {
         var userProfile = entityManager.find(UserProfile.class, userProfileDto.getId());
         if (!userProfile.getId().equals(userId)) throw new AuthException("User not authorized to edit this userProfile.");
         userProfile.setFirstname(userProfileDto.getFirstname());
@@ -86,7 +86,10 @@ public class UserProfileService {
             userProfile.setBankAccountNumber(userProfileDto.getBankAccountNumber());
         }
 
-        entityManager.persist(userProfile);
+        return userProfile;
+    }
+
+    public UserProfileDto toDto(UserProfile userProfile) {
         return Mapper.MAPPER.toDto(userProfile);
     }
 }

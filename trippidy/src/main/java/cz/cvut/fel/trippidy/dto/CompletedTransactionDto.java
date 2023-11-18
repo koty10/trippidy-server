@@ -11,19 +11,20 @@ import jakarta.json.bind.annotation.JsonbTypeSerializer;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * DTO for {@link CompletedTransaction}
  */
 public class CompletedTransactionDto implements Serializable {
-    private String id;
-    private String payerId;
+    private UUID id;
+    private UUID payerId;
     private String payerUserProfileId;
     private String payerUserProfileFirstname;
     private String payerUserProfileLastname;
     private String payerUserProfileImage;
     private String payerUserProfileEmail;
-    private String payeeId;
+    private UUID payeeId;
     private String payeeUserProfileId;
     private String payeeUserProfileFirstname;
     private String payeeUserProfileLastname;
@@ -31,13 +32,13 @@ public class CompletedTransactionDto implements Serializable {
     private String payeeUserProfileEmail;
     private BigDecimal amount;
     private boolean canceled;
-    private String tripId;
+    private UUID tripId;
 
     public CompletedTransactionDto() {
     }
 
-    public CompletedTransactionDto(String id, String payerId, String payerUserProfileId, String payerUserProfileFirstname, String payerUserProfileLastname, String payerUserProfileImage, String payeeId, String payeeUserProfileId, String payeeUserProfileFirstname, String payeeUserProfileLastname, String payeeUserProfileImage, BigDecimal amount, boolean canceled,
-                                   String tripId, String payerUserProfileEmail, String payeeUserProfileEmail) {
+    public CompletedTransactionDto(UUID id, UUID payerId, String payerUserProfileId, String payerUserProfileFirstname, String payerUserProfileLastname, String payerUserProfileImage, UUID payeeId, String payeeUserProfileId, String payeeUserProfileFirstname, String payeeUserProfileLastname, String payeeUserProfileImage, BigDecimal amount, boolean canceled,
+                                   UUID tripId, String payerUserProfileEmail, String payeeUserProfileEmail) {
         this.id = id;
         this.payerId = payerId;
         this.payerUserProfileId = payerUserProfileId;
@@ -56,19 +57,19 @@ public class CompletedTransactionDto implements Serializable {
         this.tripId = tripId;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
-    public String getPayerId() {
+    public UUID getPayerId() {
         return payerId;
     }
 
-    public void setPayerId(String payerId) {
+    public void setPayerId(UUID payerId) {
         this.payerId = payerId;
     }
 
@@ -104,11 +105,11 @@ public class CompletedTransactionDto implements Serializable {
         this.payerUserProfileImage = payerUserProfileImage;
     }
 
-    public String getPayeeId() {
+    public UUID getPayeeId() {
         return payeeId;
     }
 
-    public void setPayeeId(String payeeId) {
+    public void setPayeeId(UUID payeeId) {
         this.payeeId = payeeId;
     }
 
@@ -213,11 +214,11 @@ public class CompletedTransactionDto implements Serializable {
                 "canceled = " + canceled + ")";
     }
 
-    public String getTripId() {
+    public UUID getTripId() {
         return tripId;
     }
 
-    public void setTripId(String tripId) {
+    public void setTripId(UUID tripId) {
         this.tripId = tripId;
     }
 

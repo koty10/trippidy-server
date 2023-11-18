@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.Collection;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @NamedQueries({
@@ -14,19 +15,20 @@ public class Category {
     public static final String FIND_BY_NAME = "Category.findByName";
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
-    private String id;
+    private UUID id;
     @Basic
     @Column(name = "name", nullable = false, length = 128)
     private String name;
     @OneToMany(mappedBy = "category")
     private Collection<Item> items;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

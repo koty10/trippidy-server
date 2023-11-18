@@ -6,16 +6,17 @@ import cz.cvut.fel.trippidy.entity.Member;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * A DTO for the {@link Member} entity
  */
 public class MemberDto implements Serializable {
-    private String id;
+    private UUID id;
     private String role;
     private boolean accepted;
     private Collection<ItemDto> items;
-    private String tripId;
+    private UUID tripId;
     private String userProfileId;
     private String userProfileFirstname;
     private String userProfileLastname;
@@ -27,7 +28,7 @@ public class MemberDto implements Serializable {
     private String userProfileIban;
     private String userProfileEmail;
 
-    public MemberDto(String id, String role, boolean accepted, Collection<ItemDto> items, String tripId, String userProfileId, String userProfileFirstname, String userProfileLastname, String userProfileImage,
+    public MemberDto(UUID id, String role, boolean accepted, Collection<ItemDto> items, UUID tripId, String userProfileId, String userProfileFirstname, String userProfileLastname, String userProfileImage,
                      Collection<FutureTransactionDto> futureTransactions,
                      Collection<CompletedTransactionDto> completedTransactionsSent,
                      Collection<CompletedTransactionDto> completedTransactionsReceived, String userProfileBankAccountNumber, String userProfileIban, String userProfileEmail) {
@@ -51,7 +52,7 @@ public class MemberDto implements Serializable {
     public MemberDto() {
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -67,7 +68,7 @@ public class MemberDto implements Serializable {
         return items;
     }
 
-    public String getTripId() {
+    public UUID getTripId() {
         return tripId;
     }
 
@@ -91,7 +92,7 @@ public class MemberDto implements Serializable {
         return accepted;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -107,7 +108,7 @@ public class MemberDto implements Serializable {
         this.items = items;
     }
 
-    public void setTripId(String tripId) {
+    public void setTripId(UUID tripId) {
         this.tripId = tripId;
     }
 

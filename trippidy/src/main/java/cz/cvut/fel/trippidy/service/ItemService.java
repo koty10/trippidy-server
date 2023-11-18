@@ -20,9 +20,9 @@ public class ItemService {
     @PersistenceContext
     EntityManager entityManager;
 
-    public ItemDto updateItem(String userId, ItemDto itemDto) throws AuthException {
+    public Item updateItem(String userId, ItemDto itemDto) throws AuthException {
         var item = entityManager.find(Item.class, itemDto.getId());
-        if (!item.getMember().getUserProfile().getId().equals(userId)) throw new AuthException("User not authorized to edit this item.");
+        if (!item.getMember().getUserProfile().getId().toString().equals(userId)) throw new AuthException("User not authorized to edit this item.");
 
         var updatedItem = Mapper.MAPPER.toEntity(itemDto);
 
@@ -50,28 +50,32 @@ public class ItemService {
 //        entityManager.persist(item);
 //        entityManager.persist(category);
 
-
-        return Mapper.MAPPER.toDto(item);
+        return item;
     }
 
-    public ItemDto createItem(String userId, ItemDto itemDto) throws Exception { //todo remove userId
-        if (entityManager.find(Item.class, itemDto.getId()) != null) throw new Exception("Element already exists");
-
+    public Item createItem(ItemDto itemDto) {
         Item item = Mapper.MAPPER.toEntity(itemDto);
         var category = entityManager.createNamedQuery(Category.FIND_BY_NAME, Category.class)
                 .setParameter("name", item.getCategory().getName())
                 .getResultStream()
                 .findFirst();
         if (category.isPresent()) {
-            item.setCategory(category.get());
+            var c = category.get();
+            item.setCategory(c);
+            entityManager.merge(c);
         } else {
-            entityManager.persist(item.getCategory());
+            item.getCategory().setItems(List.of(item));
         }
-
         entityManager.persist(item);
+
         var member = entityManager.find(Member.class, item.getMember().getId());
         member.getItems().add(item);
-        entityManager.persist(member);
+        entityManager.merge(member);
+
+        return item;
+    }
+
+    public ItemDto toDto(Item item) {
         return Mapper.MAPPER.toDto(item);
     }
 }

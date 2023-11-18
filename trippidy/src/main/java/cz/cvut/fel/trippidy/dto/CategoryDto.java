@@ -5,16 +5,17 @@ import cz.cvut.fel.trippidy.entity.Category;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * A DTO for the {@link Category} entity
  */
 public class CategoryDto implements Serializable {
-    private String id;
+    private UUID id;
     private String name;
     private Collection<ItemDto> items;
 
-    public CategoryDto(String id, String name, Collection<ItemDto> items) {
+    public CategoryDto(UUID id, String name, Collection<ItemDto> items) {
         this.id = id;
         this.name = name;
         this.items = items;
@@ -23,7 +24,7 @@ public class CategoryDto implements Serializable {
     public CategoryDto() {
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -35,7 +36,7 @@ public class CategoryDto implements Serializable {
         return items;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

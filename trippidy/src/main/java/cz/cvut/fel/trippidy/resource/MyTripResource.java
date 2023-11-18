@@ -13,6 +13,7 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.SecurityContext;
 import java.util.Collection;
+import java.util.UUID;
 
 @Path("/v1/my/trip")
 @RequestScoped
@@ -34,18 +35,19 @@ public class MyTripResource {
     @GET
     @Path("{id}")
     public TripDto trip(@PathParam("id") String id) throws AuthException {
-        return tripService.findTrip(securityContext.getUserPrincipal().getName(), id);
+        return tripService.findTrip(securityContext.getUserPrincipal().getName(), UUID.fromString(id));
     }
 
     @POST
-    public TripDto createTrip(TripDto tripDto) throws AuthException {
-        var trip = tripService.createTrip(securityContext.getUserPrincipal().getName(), tripDto);
-        return tripService.findTrip(securityContext.getUserPrincipal().getName(), trip.getId());
+    public TripDto createTrip(TripDto tripDto) {
+        var trip = tripService.createTrip(tripDto);
+        return tripService.toDto(trip);
     }
 
     @DELETE
     @Path("{id}")
     public TripDto deleteTrip(@PathParam("id") String id) throws AuthException {
-        return tripService.deleteTrip(securityContext.getUserPrincipal().getName(), id);
+        var trip = tripService.deleteTrip(securityContext.getUserPrincipal().getName(), UUID.fromString(id));
+        return tripService.toDto(trip);
     }
 }

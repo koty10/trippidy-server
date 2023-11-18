@@ -28,7 +28,8 @@ public class MyCompletedTransactionResource {
     SecurityContext securityContext;
 
     @POST
-    public CompletedTransactionDto createCompletedTransaction(@Context HttpServletRequest request, CompletedTransactionDto completedTransactionDto) throws Exception {
-        return completedTransactionService.createCompletedTransaction(securityContext.getUserPrincipal().getName(), completedTransactionDto);
+    public CompletedTransactionDto createCompletedTransaction(CompletedTransactionDto completedTransactionDto) {
+        var completedTransaction = completedTransactionService.createCompletedTransaction(completedTransactionDto);
+        return completedTransactionService.toDto(completedTransaction);
     }
 }

@@ -10,12 +10,13 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * A DTO for the {@link Trip} entity
  */
 public class TripDto implements Serializable {
-    private String id;
+    private UUID id;
     private String name;
     private Collection<MemberDto> members;
     //@JsonbDateFormat(value = "yyyy-MM-dd HH:mm:ss")
@@ -25,7 +26,7 @@ public class TripDto implements Serializable {
     private boolean isDeleted;
     private Collection<CompletedTransactionDto> completedTransactions;
 
-    public TripDto(String id, String name, Collection<MemberDto> members, LocalDateTime dateFrom, LocalDateTime dateTo) {
+    public TripDto(UUID id, String name, Collection<MemberDto> members, LocalDateTime dateFrom, LocalDateTime dateTo) {
         this.id = id;
         this.name = name;
         this.members = members;
@@ -46,7 +47,7 @@ public class TripDto implements Serializable {
         isDeleted = deleted;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -66,7 +67,7 @@ public class TripDto implements Serializable {
         return dateTo;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

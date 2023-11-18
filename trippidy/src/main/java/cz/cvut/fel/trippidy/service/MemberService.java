@@ -10,35 +10,34 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.security.auth.message.AuthException;
 
+import java.util.UUID;
+
 @Stateless
 public class MemberService {
 
     @PersistenceContext
     EntityManager entityManager;
 
-    public MemberDto updateMember(String userId, MemberDto memberDto) throws AuthException {
+    public Member updateMember(String userId, MemberDto memberDto) throws AuthException {
         var member = entityManager.find(Member.class, memberDto.getId());
         if (!member.getUserProfile().getId().equals(userId)) throw new AuthException("User not authorized to edit this member.");
         member.setAccepted(memberDto.getAccepted());
         member.setRole(memberDto.getRole());
-        entityManager.persist(member);
-        return Mapper.MAPPER.toDto(member);
+        //entityManager.persist(member);
+        return member;
     }
 
-    public Member createMember(String userId, MemberDto memberDto) throws Exception { //todo remove userId
-        //if (entityManager.find(Member.class, memberDto.getId()) != null) throw new Exception("Element already exists");
-
+    public Member createMember(MemberDto memberDto) {
         Member member = Mapper.MAPPER.toEntity(memberDto);
-        entityManager.persist(member);
 
         var trip = entityManager.find(Trip.class, member.getTrip().getId());
         var userProfile = entityManager.find(UserProfile.class, member.getUserProfile().getId());
-        trip.getMembers().add(member);
-        userProfile.getMembers().add(member);
-        entityManager.persist(trip);
-        entityManager.persist(userProfile);
-        // FIXME I have to load full member object here but probably this is not the best approach
+        // TODO it might be a problem
+        //trip.getMembers().add(member);
+        //userProfile.getMembers().add(member);
+        member.setTrip(trip);
         member.setUserProfile(userProfile);
+        entityManager.persist(member);
         return member;
         //return Mapper.MAPPER.toDto(member);
     }
