@@ -44,6 +44,6 @@ public class CompletedTransactionService {
     }
 
     public CompletedTransactionDto toDto(CompletedTransaction completedTransaction) {
-        return Mapper.MAPPER.toDto(completedTransaction);
+        return Mapper.MAPPER.toDto(entityManager.find(CompletedTransaction.class, completedTransaction.getId()));
     }
 }

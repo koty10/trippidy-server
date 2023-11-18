@@ -91,7 +91,7 @@ public class TripService {
     }
 
     public TripDto toDto(Trip trip) {
-        return Mapper.MAPPER.toDto(trip);
+        return Mapper.MAPPER.toDto(entityManager.find(Trip.class, trip.getId()));
     }
 
     // Throws AuthException if user is not an owner of the trip

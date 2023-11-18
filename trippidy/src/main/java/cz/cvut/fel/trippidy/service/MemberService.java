@@ -43,6 +43,6 @@ public class MemberService {
     }
 
     public MemberDto toDto(Member member) {
-        return Mapper.MAPPER.toDto(member);
+        return Mapper.MAPPER.toDto(entityManager.find(Member.class, member.getId()));
     }
 }

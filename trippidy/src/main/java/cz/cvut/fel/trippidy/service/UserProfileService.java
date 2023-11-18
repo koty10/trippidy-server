@@ -90,6 +90,6 @@ public class UserProfileService {
     }
 
     public UserProfileDto toDto(UserProfile userProfile) {
-        return Mapper.MAPPER.toDto(userProfile);
+        return Mapper.MAPPER.toDto(entityManager.find(UserProfile.class, userProfile.getId()));
     }
 }

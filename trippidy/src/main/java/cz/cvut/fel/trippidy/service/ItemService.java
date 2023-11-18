@@ -76,6 +76,6 @@ public class ItemService {
     }
 
     public ItemDto toDto(Item item) {
-        return Mapper.MAPPER.toDto(item);
+        return Mapper.MAPPER.toDto(entityManager.find(Item.class, item.getId()));
     }
 }
