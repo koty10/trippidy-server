@@ -9,12 +9,12 @@ import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.iban4j.CountryCode;
 import org.iban4j.Iban;
 
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.security.auth.message.AuthException;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.PersistenceContext;
+import jakarta.security.auth.message.AuthException;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.logging.Logger;

@@ -1,8 +1,8 @@
 package cz.cvut.fel.trippidy.serializers;
 
-import javax.json.bind.serializer.JsonbDeserializer;
-import javax.json.bind.serializer.DeserializationContext;
-import javax.json.stream.JsonParser;
+import jakarta.json.bind.serializer.JsonbDeserializer;
+import jakarta.json.bind.serializer.DeserializationContext;
+import jakarta.json.stream.JsonParser;
 import java.math.BigDecimal;
 import java.lang.reflect.Type;
 

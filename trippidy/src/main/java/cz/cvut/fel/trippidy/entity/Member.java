@@ -1,15 +1,17 @@
 package cz.cvut.fel.trippidy.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import java.util.Collection;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 public class Member {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false)
-    private String id;
+    private UUID id;
     @Basic
     @Column(name = "role", nullable = false, length = 64)
     private String role;
@@ -33,11 +35,11 @@ public class Member {
     @OneToMany(mappedBy = "payee", cascade = CascadeType.ALL)
     private Collection<CompletedTransaction> completedTransactionsReceived;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

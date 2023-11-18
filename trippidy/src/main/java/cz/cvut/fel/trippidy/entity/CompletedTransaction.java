@@ -1,6 +1,6 @@
 package cz.cvut.fel.trippidy.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 

@@ -4,10 +4,10 @@ import cz.cvut.fel.trippidy.entity.CompletedTransaction;
 import cz.cvut.fel.trippidy.serializers.BigDecimalDeserializer;
 import cz.cvut.fel.trippidy.serializers.BigDecimalSerializer;
 
-import javax.faces.convert.BigDecimalConverter;
-import javax.json.bind.annotation.JsonbProperty;
-import javax.json.bind.annotation.JsonbTypeDeserializer;
-import javax.json.bind.annotation.JsonbTypeSerializer;
+import jakarta.faces.convert.BigDecimalConverter;
+import jakarta.json.bind.annotation.JsonbProperty;
+import jakarta.json.bind.annotation.JsonbTypeDeserializer;
+import jakarta.json.bind.annotation.JsonbTypeSerializer;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;

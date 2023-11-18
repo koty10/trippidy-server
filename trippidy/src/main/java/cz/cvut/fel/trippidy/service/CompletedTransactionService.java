@@ -8,10 +8,10 @@ import cz.cvut.fel.trippidy.entity.Trip;
 import cz.cvut.fel.trippidy.entity.UserProfile;
 import cz.cvut.fel.trippidy.mappers.Mapper;
 
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.security.auth.message.AuthException;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.security.auth.message.AuthException;
 
 @Stateless
 public class CompletedTransactionService {

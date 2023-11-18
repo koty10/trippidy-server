@@ -5,10 +5,10 @@ import cz.cvut.fel.trippidy.dto.MemberDto;
 import cz.cvut.fel.trippidy.entity.*;
 import cz.cvut.fel.trippidy.mappers.Mapper;
 
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.security.auth.message.AuthException;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.security.auth.message.AuthException;
 
 @Stateless
 public class MemberService {
@@ -26,7 +26,7 @@ public class MemberService {
     }
 
     public Member createMember(String userId, MemberDto memberDto) throws Exception { //todo remove userId
-        if (entityManager.find(Member.class, memberDto.getId()) != null) throw new Exception("Element already exists");
+        //if (entityManager.find(Member.class, memberDto.getId()) != null) throw new Exception("Element already exists");
 
         Member member = Mapper.MAPPER.toEntity(memberDto);
         entityManager.persist(member);

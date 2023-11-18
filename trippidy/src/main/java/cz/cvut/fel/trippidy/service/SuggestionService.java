@@ -13,7 +13,7 @@ import cz.cvut.fel.trippidy.dto.SuggestionResponseDto;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;

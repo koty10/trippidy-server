@@ -8,10 +8,10 @@ import cz.cvut.fel.trippidy.entity.*;
 import cz.cvut.fel.trippidy.enums.MemberRole;
 import cz.cvut.fel.trippidy.mappers.Mapper;
 
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.security.auth.message.AuthException;
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.security.auth.message.AuthException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -71,7 +71,7 @@ public class TripService {
     public TripDto findTrip(String userId, String id) throws AuthException {
         var trip = entityManager.find(Trip.class, id);
         if (trip.getMembers().stream().map(x -> x.getUserProfile().getId()).anyMatch(x -> x.equals(userId))) {
-            return Mapper.MAPPER.toDto(entityManager.find(Trip.class, id));
+            return Mapper.MAPPER.toDto(trip);
         } else {
             throw new AuthException("User not authorized to read this item.");
         }

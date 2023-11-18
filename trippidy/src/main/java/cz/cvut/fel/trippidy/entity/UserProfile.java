@@ -1,6 +1,6 @@
 package cz.cvut.fel.trippidy.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import java.util.Collection;
 import java.util.Objects;

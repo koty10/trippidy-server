@@ -1,6 +1,6 @@
 package cz.cvut.fel.trippidy.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class Trip {
     @Column(name = "name", nullable = false, length = 128)
     private String name;
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
-    private Collection<Member> members;
+    private Collection<Member> members = new ArrayList<>();
 
     @Column(name = "date_from")
     private LocalDateTime dateFrom;

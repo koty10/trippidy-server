@@ -4,14 +4,14 @@ import cz.cvut.fel.trippidy.dto.TripDto;
 import cz.cvut.fel.trippidy.mappers.Mapper;
 import cz.cvut.fel.trippidy.service.TripService;
 
-import javax.annotation.security.RolesAllowed;
-import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.security.auth.message.AuthException;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.SecurityContext;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.security.auth.message.AuthException;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.SecurityContext;
 import java.util.Collection;
 
 @Path("/v1/my/trip")
