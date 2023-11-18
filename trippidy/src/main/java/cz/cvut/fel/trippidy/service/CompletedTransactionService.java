@@ -30,7 +30,6 @@ public class CompletedTransactionService {
         payer.getCompletedTransactionsSent().add(completedTransaction);
         payee.getCompletedTransactionsReceived().add(completedTransaction);
 
-        // FIXME I have to load full member object here but probably this is not the best approach
         completedTransaction.setTrip(trip);
         completedTransaction.setPayer(payer);
         completedTransaction.setPayee(payee);

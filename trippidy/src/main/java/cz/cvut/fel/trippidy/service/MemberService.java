@@ -32,7 +32,6 @@ public class MemberService {
 
         var trip = entityManager.find(Trip.class, member.getTrip().getId());
         var userProfile = entityManager.find(UserProfile.class, member.getUserProfile().getId());
-        // TODO it might be a problem
         //trip.getMembers().add(member);
         //userProfile.getMembers().add(member);
         member.setTrip(trip);
