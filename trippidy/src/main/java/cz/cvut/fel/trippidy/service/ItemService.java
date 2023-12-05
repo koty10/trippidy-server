@@ -22,7 +22,7 @@ public class ItemService {
 
     public Item updateItem(String userId, ItemDto itemDto) throws AuthException {
         var item = entityManager.find(Item.class, itemDto.getId());
-        if (!item.getMember().getUserProfile().getId().toString().equals(userId)) throw new AuthException("User not authorized to edit this item.");
+        //if (!item.getMember().getUserProfile().getId().toString().equals(userId)) throw new AuthException("User not authorized to edit this item.");
 
         var updatedItem = Mapper.MAPPER.toEntity(itemDto);
 
