@@ -11,6 +11,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.security.auth.message.AuthException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 //@ApplicationScoped
@@ -51,6 +52,12 @@ public class ItemService {
 //        entityManager.persist(category);
 
         return item;
+    }
+
+    public boolean deleteItem(String userId, UUID itemId) throws AuthException {
+        var item = entityManager.find(Item.class, itemId);
+        entityManager.remove(item);
+        return true;
     }
 
     public Item createItem(ItemDto itemDto) {

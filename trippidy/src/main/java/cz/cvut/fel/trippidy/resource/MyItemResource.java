@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
+import java.util.UUID;
 
 @Path("/v1/my/item")
 @RequestScoped
@@ -43,5 +44,11 @@ public class MyItemResource {
     public ItemDto createItem(ItemDto itemDto) {
         var item = itemService.createItem(itemDto);
         return itemService.toDto(item);
+    }
+
+    @DELETE
+    @Path("{itemId}")
+    public boolean deleteItem(@PathParam("itemId") String id) throws AuthException {
+        return itemService.deleteItem(securityContext.getUserPrincipal().getName(), UUID.fromString(id));
     }
 }
