@@ -60,8 +60,8 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
       - POSTGRES_DB=db
-    #volumes:
-    #  - trippidy-db-volume:/var/lib/postgresql/data
+    volumes:
+      - trippidy-db-volume:/var/lib/postgresql/data
     ports:
       - "9654:5432"
     networks:
