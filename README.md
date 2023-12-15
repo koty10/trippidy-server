@@ -22,3 +22,5 @@ This is a server for the Trippidy mobile and web app.
 - Go to the trippidy folder
 - Comment the Nginx container from docker-compose.yml and also uncomment "9680:8080" port binding for trippidy-payara container
 - Comment cz.cvut.fel.trippidy.service.SuggestionService and cz.cvut.fel.trippidy.resource.SuggestionResource files if you do not want to use OpenAI API
+- Run `mvn clean package` to build a project
+- Run `docker-compose up` to start all containers
