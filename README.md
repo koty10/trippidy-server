@@ -13,7 +13,7 @@ This is a server for the Trippidy mobile and web app.
 - Go to the trippidy folder
 - Change values in init-letsencrypt.sh to yours. Namely, domain and email values
 - Run `init-letsencrypt.sh` to get a certificate from Let's Encrypt
-- Copy config.properties.example to config.properties and fill your secret key for OpenAI API. If needed, I can provide mine by email.
+- Copy trippidy\src\main\resources\config.properties.example to trippidy\src\main\resources\config.properties and fill your secret key for OpenAI API. If needed, I can provide mine by email.
 - Run `mvn clean package` to build a project
 - Run `docker-compose up` to start all containers
 - To setup CI/CD using Jenkins, it would be needed to manually configure the Jenkins server and add a Webhook to GitHub. The Jenkins server is running on https://your.domain:9680/jenkins/
